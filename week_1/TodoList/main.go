@@ -1,8 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"net/http"
 	"time"
+
+	"github.com/google/uuid"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -10,12 +14,20 @@ import (
 )
 
 type Todo struct {
-	ID       int
+	ID       string
 	Title    string
 	Complete bool
+	Duration int
 	CreateAt time.Time
 	FinishAt time.Time
 }
+
+func (todo *Todo) BeforeCreate(scope *gorm.Scope) error {
+	scope.SetColumn("ID", uuid.New().String())
+	return nil
+}
+
+const todos string = "todos"
 
 var db *gorm.DB
 
@@ -32,16 +44,19 @@ func main() {
 	defer db.Close()
 	db.LogMode(true)
 
-	err := db.AutoMigrate(Todo{}).Error
+	err1 := db.AutoMigrate(Todo{}).Error
 
-	if err != nil {
-		log.Fatal("could not create table todolist")
+	if err1 != nil {
+		log.Fatal("could not create table todo list")
 	}
 
 	route := gin.Default()
-	route.GET("/todo", listTodos)
+	route.GET(todos, listTodos)
 
-	route.POST("/todo", addTodo)
+	route.GET(todos+"/:id", getTodo)
+
+	route.POST(todos+"/:id", updateTodo)
+	route.POST(todos, addTodo)
 	route.Run(":8787")
 
 }
@@ -51,36 +66,86 @@ func listTodos(c *gin.Context) {
 	var err error
 	err = db.Find(&todos).Error
 	if err != nil {
-		c.JSON(500, customError{message: "could not get todolist", err: err})
+		c.JSON(http.StatusInternalServerError, customError{message: "could not get todo list"})
 		//c.String(500,"could not get todolist")
 		return
 	}
-	c.JSON(200, todos)
+	c.JSON(http.StatusOK, todos)
 }
 
 func addTodo(c *gin.Context) {
 	var arrgument struct {
-		Title string
+		Title    string
+		Duration int
 	}
 	err := c.BindJSON(&arrgument)
 	if err != nil {
-		c.JSON(400, customError{message: "Message is invalid, invalid param or bad param", err: err})
+		c.JSON(http.StatusBadRequest, customError{message: "message is invalid, invalid param or bad param"})
+		return
+	}
+	if arrgument.Duration <= 0 {
+		c.JSON(http.StatusBadRequest, customError{message: "duration need greater than 0"})
 		return
 	}
 
-	todo := Todo{Title: arrgument.Title,CreateAt:time.Now(),FinishAt:time.Now()}
+	todo := Todo{Title: arrgument.Title, CreateAt: time.Now(), Complete: false, Duration: arrgument.Duration, FinishAt: time.Now().Add(time.Duration(arrgument.Duration * 3600))}
 	//todo := Todo{Title: arrgument.Title}
 	err = db.Create(&todo).Error
 	if err != nil {
-		c.JSON(500, customError{message: "could not save to database"})
+		c.JSON(http.StatusInternalServerError, customError{message: "could not save to database"})
 		return
 	}
-	c.JSON(200, todo)
+	c.JSON(http.StatusOK, todo)
+}
+
+func getTodo(c *gin.Context) {
+	id := c.Param("id")
+	if len(id) == 0 {
+		c.JSON(http.StatusBadRequest, customError{message: "invalid request"})
+	}
+	var todo Todo
+
+	err := db.Where(&Todo{ID: id}).Find(&todo).Error
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, customError{message: fmt.Sprintf("could not get todo with id %s", id)})
+		return
+	}
+	c.JSON(http.StatusOK, todo)
+}
+
+func updateTodo(c *gin.Context) {
+	id := c.Param("id")
+	if id == "" {
+		c.JSON(http.StatusBadRequest, customError{message: "invalid request"})
+	}
+
+	var payload struct {
+		Title    string
+		Complete bool
+	}
+
+	err := c.BindJSON(&payload)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, customError{message: "bad request"})
+	}
+	var todo Todo
+	var updateError error
+
+	if payload.Complete {
+		updateError = db.Model(&todo).Where("id = ?", id).Update(Todo{Title: payload.Title, Complete: payload.Complete, FinishAt: time.Now()}).Error
+	} else {
+		updateError = db.Model(&todo).Where("id = ?", id).Update(Todo{Title: payload.Title, Complete: payload.Complete}).Error
+	}
+	if updateError != nil {
+		c.JSON(http.StatusInternalServerError, customError{message: fmt.Sprintf("could not update todo have id %s with payload %s", id, payload)})
+		return
+	}
+	c.JSON(http.StatusOK, todo)
 }
 
 type customError struct {
 	message string
-	err     error
 }
 
 func (c *customError) Error() string {

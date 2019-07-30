@@ -28,7 +28,6 @@ type Line struct {
 }
 
 func (f S3FileInfo) read(outPut chan Line, wg *sync.WaitGroup) (err error) {
-	wg.Add(1)
 	defer wg.Done()
 	defer close(outPut)
 	resp, err := http.Get(f.Info.Path)
@@ -71,7 +70,6 @@ type LocalFileInfo struct {
 }
 
 func (f LocalFileInfo) read(outPut chan Line, wg *sync.WaitGroup) (err error) {
-
 	defer wg.Done()
 	defer close(outPut)
 	file, err := os.Open(f.Info.Path)
