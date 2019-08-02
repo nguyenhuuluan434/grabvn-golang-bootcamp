@@ -40,19 +40,19 @@ func main() {
 }
 
 func createPassenger(c *gin.Context) {
-	var arrgument struct {
+	var argument struct {
 		Name string
 	}
-	err := c.BindJSON(&arrgument)
-	log.Println(arrgument)
+	err := c.BindJSON(&argument)
+	log.Println(argument)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, errors.New("bad request"))
 		return
 	}
-	createPassengerRequest := passengerfeedbackservice.CreatePassengerRequest{Name: "LuanNH1"}
+	createPassengerRequest := passengerfeedbackservice.CreatePassengerRequest{Name: argument.Name}
 	resPassenger, err := client.AddNewPassenger(ctx, &createPassengerRequest)
 	if err != nil {
-		log.Println("failed to receive msg create passenger: %v", err)
+		log.Println("failed to receive msg create passenger: ", err)
 		c.JSON(http.StatusInternalServerError, errors.New("internal server error"))
 		return
 	}
