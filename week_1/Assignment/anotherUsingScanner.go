@@ -11,7 +11,7 @@ import "os"
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
-fmt.Print("> ")
+	fmt.Print("> ")
 	for scanner.Scan() {
 		input := scanner.Text()
 		//remove duplicate space in input, strim space begin and end
@@ -60,7 +60,7 @@ fmt.Print("> ")
 			fmt.Printf("%d * %d = %d \n", firstOperand, secondOperand, result)
 			continue
 		case inputParse[1] == "/":
-			if secondOperand == 0{
+			if secondOperand == 0 {
 				println("Not divide 0")
 				continue
 			}

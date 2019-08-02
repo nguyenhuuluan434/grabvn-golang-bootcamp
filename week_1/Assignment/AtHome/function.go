@@ -60,7 +60,7 @@ func replaceAllSubString(input string, subString string, newString string) (resu
 	if err != nil {
 		return
 	}
-	return regexSpace.ReplaceAllString(input, newString),nil
+	return regexSpace.ReplaceAllString(input, newString), nil
 }
 
 func operationHandle(firstOperand, secondOperand float64, op string) (result float64, err error) {

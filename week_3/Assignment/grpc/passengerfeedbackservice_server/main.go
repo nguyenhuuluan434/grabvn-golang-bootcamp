@@ -9,13 +9,13 @@ import (
 )
 
 const (
-	port = ":13888"
-	logDebug  = true
+	port     = ":13888"
+	logDebug = true
 )
+
 var db *gorm.DB
 
 //var dbService *DbService
-
 
 func init() {
 	var err error
@@ -42,7 +42,7 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
-	server := server{db: db,logDebug:logDebug}
+	server := server{db: db, logDebug: logDebug}
 	passengerfeedbackservice.RegisterPassengerFeedbackServiceServer(s, &server)
 
 	if err := s.Serve(lis); err != nil {

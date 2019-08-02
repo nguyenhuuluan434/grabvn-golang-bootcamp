@@ -12,14 +12,15 @@ import (
 )
 
 const (
-	grpcPort = ":13888"
-
+	grpcPort    = ":13888"
+	restApiPort = ":8787"
 )
 
 var client passengerfeedbackservice.PassengerFeedbackServiceClient
 var ctx context.Context
 var cancel context.CancelFunc
 var conn grpc.ClientConn
+
 func init() {
 	conn, err := grpc.Dial("localhost"+grpcPort, grpc.WithInsecure())
 	if err != nil {
@@ -33,14 +34,14 @@ func init() {
 func main() {
 	route := gin.Default()
 	route.POST("passengers", createPassenger)
-	route.Run(":8787")
+	route.Run(restApiPort)
 	defer cancel()
 	defer conn.Close()
 }
 
-func createPassenger(c *gin.Context)  {
+func createPassenger(c *gin.Context) {
 	var arrgument struct {
-		Name    string
+		Name string
 	}
 	err := c.BindJSON(&arrgument)
 	log.Println(arrgument)
@@ -48,21 +49,19 @@ func createPassenger(c *gin.Context)  {
 		c.JSON(http.StatusBadRequest, errors.New("bad request"))
 		return
 	}
-	createPassengerRequest := passengerfeedbackservice.CreatePassengerRequest{Name:"LuanNH1"}
+	createPassengerRequest := passengerfeedbackservice.CreatePassengerRequest{Name: "LuanNH1"}
 	resPassenger, err := client.AddNewPassenger(ctx, &createPassengerRequest)
 	if err != nil {
 		log.Println("failed to receive msg create passenger: %v", err)
 		c.JSON(http.StatusInternalServerError, errors.New("internal server error"))
 		return
 	}
-
-	var dataResponse struct{
+	var dataResponse struct {
 		Name string
-		Id string
+		Id   string
 	}
 	dataResponse.Id = resPassenger.Id
 	dataResponse.Name = resPassenger.Name
-	c.JSON(http.StatusOK,dataResponse)
+	c.JSON(http.StatusOK, dataResponse)
 	return
-
 }

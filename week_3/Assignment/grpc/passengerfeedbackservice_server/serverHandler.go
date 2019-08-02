@@ -51,7 +51,7 @@ func (s server) AddBooking(cxt context.Context, req *pfs.CreateBookingRequest) (
 	if s.logDebug {
 		log.Print(req)
 	}
-	passenger,err:=getPassenger(s.db,req.PassengerId)
+	passenger, err := getPassenger(s.db, req.PassengerId)
 	if err != nil {
 		return &pfs.CreateBookingResponse{ResponseStatus: &pfs.ResponseInfo{Code: http.StatusNotFound, Message: fmt.Sprintf("there is no passenger id %s", req.PassengerId)}}, nil
 	}
@@ -69,7 +69,7 @@ func (s server) UpdateFinishBooking(ctx context.Context, req *pfs.UpdateBookingR
 	if s.logDebug {
 		log.Print(req)
 	}
-	booking,err := getBooking(s.db,req.BookingCode)
+	booking, err := getBooking(s.db, req.BookingCode)
 	if err != nil {
 		return &pfs.UpdateBookingResponse{ResponseStatus: &pfs.ResponseInfo{Code: http.StatusNotFound, Message: fmt.Sprintf("there is no booking id %s", req.BookingCode)}}, nil
 	}
@@ -85,7 +85,7 @@ func (s server) GetBookingByCode(ctx context.Context, req *pfs.GetBookingRequest
 	if s.logDebug {
 		log.Print(req)
 	}
-	booking,err := getBooking(s.db,req.BookingCode)
+	booking, err := getBooking(s.db, req.BookingCode)
 	if err != nil {
 		return &pfs.GetBookingResponse{ResponseStatus: &pfs.ResponseInfo{Code: http.StatusNotFound, Message: fmt.Sprintf("there is no booking id %s", req.BookingCode)}}, err
 	}
@@ -103,7 +103,7 @@ func (s server) GetBookingByPassengerId(ctx context.Context, req *pfs.GetBooking
 	if s.logDebug {
 		log.Print(req)
 	}
-	_,err:=getPassenger(s.db,req.PassengerId)
+	_, err := getPassenger(s.db, req.PassengerId)
 	if err != nil {
 		return &pfs.PassengerBookingResponse{ResponseStatus: &pfs.ResponseInfo{Code: http.StatusNotFound, Message: fmt.Sprintf("there is no passenger id %s", req.PassengerId)}}, nil
 	}
@@ -127,7 +127,7 @@ func (s server) GetBookingByPassengerId(ctx context.Context, req *pfs.GetBooking
 		var id, passengerId, path string
 		var isFinish, isDelete bool
 		var createdAt, finishAt time.Time
-		rows.Scan(&id, &passengerId, &path, &isFinish,&isDelete, &createdAt, &finishAt, )
+		rows.Scan(&id, &passengerId, &path, &isFinish, &isDelete, &createdAt, &finishAt)
 		//fmt.Println(rows.Columns())
 		var from *pfs.Location
 		var to *pfs.Location
@@ -146,9 +146,14 @@ func (s server) CreateFeedback(ctx context.Context, req *pfs.CreateFeedbackReque
 	if s.logDebug {
 		log.Print(req)
 	}
-	booking,err := getBooking(s.db,req.BookingCode)
+	booking, err := getBooking(s.db, req.BookingCode)
 	if err != nil {
 		return &pfs.CreateFeedbackResponse{ResponseStatus: &pfs.ResponseInfo{Code: http.StatusNotFound, Message: fmt.Sprintf("there is no booking id %s", req.BookingCode)}}, nil
+	}
+	var feedback Feedback
+	err = s.db.Where("booking_id = ?", req.BookingCode).Find(&feedback).Error
+	if feedback != (Feedback{}) {
+		return &pfs.CreateFeedbackResponse{ResponseStatus: &pfs.ResponseInfo{Code: http.StatusConflict, Message: fmt.Sprintf("already add feedback for booking with id %s", req.BookingCode)}}, nil
 	}
 	data := Feedback{CreatedAt: time.Now(), Message: req.FeedbackMessage, BookingId: booking.ID}
 	err = s.db.Create(&data).Error
@@ -163,7 +168,7 @@ func (s server) GetFeedbackByBookingCode(ctx context.Context, req *pfs.GetFeedba
 		log.Print(req)
 	}
 	var feedback Feedback
-	err := s.db.Where("booking_id = ?", req.BookingCode).Find(&feedback).Error
+	err := s.db.Where(" booking_id = ? AND is_delete = ?", req.BookingCode, false).Find(&feedback).Error
 	if err != nil {
 		return &pfs.GetFeedbackResponse{ResponseStatus: &pfs.ResponseInfo{Code: http.StatusNotFound, Message: fmt.Sprintf("there is no booking id %s", req.BookingCode)}}, err
 	}
@@ -183,15 +188,15 @@ func (s server) GetFeedbackByPassengerId(ctx context.Context, req *pfs.GetFeedba
 	var rows *sql.Rows
 	var rawQuery = " SELECT b.id,f.message,f.created_at "
 	rawQuery = rawQuery + "	FROM bookings b "
-	rawQuery = rawQuery + " INNER JOIN feedbacks f ON b.passenger_id = ? AND b.id = f.booking_id "
+	rawQuery = rawQuery + " INNER JOIN feedbacks f ON b.passenger_id = ? AND b.id = f.booking_id AND f.is_delete = ? "
 
-	if req.PagingRequest!=nil && req.PagingRequest.PageNumber > 0 && req.PagingRequest.PageSize > 0 {
+	if req.PagingRequest != nil && req.PagingRequest.PageNumber > 0 && req.PagingRequest.PageSize > 0 {
 		var start = (req.PagingRequest.PageNumber - 1) * req.PagingRequest.PageSize
 		var end = req.PagingRequest.PageNumber * req.PagingRequest.PageSize
 		rawQuery = rawQuery + " LIMIT ?,?"
-		rows, err = s.db.Raw(rawQuery, req.PassengerId, start, end).Rows()
+		rows, err = s.db.Raw(rawQuery, req.PassengerId,false, start, end).Rows()
 	} else {
-		rows, err = s.db.Raw(rawQuery, req.PassengerId).Rows()
+		rows, err = s.db.Raw(rawQuery, req.PassengerId,false).Rows()
 	}
 	if err != nil {
 		return &pfs.PassengerFeedbackResponse{ResponseStatus: &pfs.ResponseInfo{Code: http.StatusInternalServerError}}, err
@@ -202,7 +207,6 @@ func (s server) GetFeedbackByPassengerId(ctx context.Context, req *pfs.GetFeedba
 		var bookingId, feedBackMessage string
 		var createdAt time.Time
 		rows.Scan(&bookingId, &feedBackMessage, &createdAt)
-		fmt.Println(rows.Columns())
 		feedbacks = append(feedbacks, &pfs.FeedbackInfoResponse{BookingCode: bookingId, CreatedAt: &timestamp.Timestamp{Seconds: createdAt.Unix()}, FeedbackMessage: feedBackMessage})
 	}
 	return &pfs.PassengerFeedbackResponse{Feedbacks: feedbacks, ResponseStatus: &pfs.ResponseInfo{Code: http.StatusOK}}, nil
@@ -216,13 +220,13 @@ func (s server) DeleteFeedbackByPassengerId(ctx context.Context, req *pfs.Delete
 	if err != nil {
 		return &pfs.DeleteFeedBackResponse{ResponseStatus: &pfs.ResponseInfo{Code: http.StatusNotFound, Message: fmt.Sprintf("there is no passenger with id %s", req.PassengerId)}}, nil
 	}
-	var rawQuery = 		  " UPDATE feedbacks f SET f.is_delete = TRUE "
+	var rawQuery = " UPDATE feedbacks f SET f.is_delete = TRUE "
 	rawQuery = rawQuery + " WHERE f.booking_id IN ( "
 	rawQuery = rawQuery + "		SELECT b.id "
 	rawQuery = rawQuery + " 	FROM bookings b "
-	rawQuery = rawQuery + " 	WHERE b.passenger_id = ? ; SELECT ROW_COUNT() )"
-	err = s.db.Exec(rawQuery,passenger.ID).Error
-	if err!=nil {
+	rawQuery = rawQuery + " 	WHERE b.passenger_id = ? ) "
+	err = s.db.Exec(rawQuery, passenger.ID).Error
+	if err != nil {
 		return &pfs.DeleteFeedBackResponse{ResponseStatus: &pfs.ResponseInfo{Code: http.StatusInternalServerError}}, err
 	}
 	return &pfs.DeleteFeedBackResponse{ResponseStatus: &pfs.ResponseInfo{Code: http.StatusOK}}, nil
