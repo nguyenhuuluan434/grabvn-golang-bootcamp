@@ -225,11 +225,11 @@ func (s server) DeleteFeedbackByPassengerId(ctx context.Context, req *pfs.Delete
 	rawQuery = rawQuery + "		SELECT b.id "
 	rawQuery = rawQuery + " 	FROM bookings b "
 	rawQuery = rawQuery + " 	WHERE b.passenger_id = ? ) "
-	err = s.db.Exec(rawQuery, passenger.ID).Error
-	if err != nil {
+	query := s.db.Exec(rawQuery, passenger.ID)
+	if query.Error != nil {
 		return &pfs.DeleteFeedBackResponse{ResponseStatus: &pfs.ResponseInfo{Code: http.StatusInternalServerError}}, err
 	}
-	return &pfs.DeleteFeedBackResponse{ResponseStatus: &pfs.ResponseInfo{Code: http.StatusOK}}, nil
+	return &pfs.DeleteFeedBackResponse{ TotalFeedBack:query.RowsAffected,ResponseStatus: &pfs.ResponseInfo{Code: http.StatusOK}}, nil
 
 }
 

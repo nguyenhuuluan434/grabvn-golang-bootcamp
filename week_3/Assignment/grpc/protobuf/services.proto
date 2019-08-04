@@ -4,6 +4,7 @@ import "google/protobuf/timestamp.proto";
 
 package customerfeedback;
 
+//protoc -I protobuf/  protobuf/services.proto --go_out=plugins=grpc:passengerfeedbackservice
 service PassengerFeedbackService{
     //passenger
     rpc addNewPassenger (CreatePassengerRequest) returns (PassengerInfoResponse){}
@@ -153,7 +154,7 @@ message DeleteFeedbackByPassengerId{
 }
 
 message DeleteFeedBackResponse{
-    int32 totalFeedBack =1;
+    int64 totalFeedBack =1;
     ResponseInfo responseStatus = 2;
 }
 
