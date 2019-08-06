@@ -1,12 +1,8 @@
 package main
 
 import (
-	"bufio"
-	"bytes"
 	"fmt"
 	"io/ioutil"
-	"net/http"
-	"os"
 	"strings"
 	"sync"
 )
@@ -19,71 +15,8 @@ type FileInfo struct {
 	Path     string
 }
 
-type S3FileInfo struct {
-	Info FileInfo
-}
-
 type Line struct {
 	value string
-}
-
-func (f S3FileInfo) read(outPut chan Line, wg *sync.WaitGroup) (err error) {
-	defer wg.Done()
-	defer close(outPut)
-	resp, err := http.Get(f.Info.Path)
-	if err != nil {
-		return
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		err = customError{fmt.Sprintf("could not get file status code is %d", resp.StatusCode)}
-		return
-	}
-	data, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return err
-	}
-	index := 0
-	for len(data) > 0 {
-		line := ""
-		if len(data) < maxLengthLine {
-			line = string(data)
-			data = []byte{}
-		} else {
-			index = bytes.LastIndexByte(data[0:maxLengthLine], ' ')
-			//word have len larger than max length line
-			if index < 0 {
-				line = string(data)
-				data = []byte{}
-			} else {
-				line = string(data[0:index])
-				data = data[index:]
-			}
-		}
-		outPut <- Line{value: line}
-	}
-	return
-}
-
-type LocalFileInfo struct {
-	Info FileInfo
-}
-
-func (f LocalFileInfo) read(outPut chan Line, wg *sync.WaitGroup) (err error) {
-	defer wg.Done()
-	defer close(outPut)
-	file, err := os.Open(f.Info.Path)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		outPut <- Line{scanner.Text()}
-	}
-
-	return nil
 }
 
 type FileAbstraction interface {
@@ -123,7 +56,7 @@ func FileInfoFactory(path string) (fileInfos []FileAbstraction, err error) {
 
 func GetFileName(path string) (name string, err error) {
 	if len(path) == 0 {
-		return "", customError{message: "invalid path"}
+		return "", UnknownError{message: "invalid path"}
 	}
 	parts := strings.Split(path, "/")
 	return parts[len(parts)-1], nil
@@ -142,9 +75,9 @@ func WordCounter(data string, output chan<- map[string]int, wg *sync.WaitGroup) 
 }
 
 
-func processor(paths []string, wg *sync.WaitGroup) (result map[string]int, err error) {
+func process(paths []string, wg *sync.WaitGroup) (result map[string]int, err error) {
 	if len(paths) == 0 {
-		return make(map[string]int), customError{"missing path "}
+		return make(map[string]int), UnknownError{"missing path "}
 	}
 	var fileInfoChannel = make(chan FileAbstraction, maxBufferSize)
 	var counterChannel = make(chan map[string]int, maxBufferSize)

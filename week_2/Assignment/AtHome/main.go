@@ -18,8 +18,9 @@ func main() {
 		log.Fatal("missing input")
 	}
 
+	//done := make(chan int,100)
 	var wg sync.WaitGroup
-	result, err := processor(args, &wg)
+	result, err := process(args, &wg)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -28,5 +29,18 @@ func main() {
 		fmt.Println("word ", key, "\t occur", value, "time")
 	}
 	wg.Wait()
+
+	//for {
+	//	ok :=true;
+	//	select {
+	//	case _,ok = <-done:
+	//		if !ok {
+	//			break
+	//		}
+	//	}
+	//	if !ok {
+	//		break
+	//	}
+	//}
 
 }

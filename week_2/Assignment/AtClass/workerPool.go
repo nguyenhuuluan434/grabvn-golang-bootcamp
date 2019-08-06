@@ -12,11 +12,11 @@ import (
 	"time"
 )
 
-type Runable interface {
+type Runnable interface {
 	run(workerId int)
 }
 
-type Job Runable
+type Job Runnable
 
 type Worker struct {
 	index         int
@@ -29,6 +29,7 @@ func (w Worker) start() {
 		if len(w.job) > 0 {
 			if job := <-w.job; job != nil {
 				job.run(w.index)
+				//push back pool when worker finish task
 				w.poolContainer.workerPool <- w
 			}
 		}
@@ -78,7 +79,9 @@ type fileReaderTask struct {
 }
 
 func (task fileReaderTask) run(workerId int) {
-	task.fileInfo.read(task.outPut)
+	if err := task.fileInfo.read(task.outPut); err != nil {
+		log.Printf("error occurrred while reading file %v, %v", task, err)
+	}
 }
 
 type counterWordTask struct {
@@ -109,8 +112,8 @@ func WordCounter(data string) (result map[string]int) {
 }
 
 const maxLengthLine = 200
-const numBufferSize = 10000
-const noWorker = 5
+const numBufferSize = 100
+const noWorker = 10
 
 type Int int
 
@@ -143,28 +146,41 @@ func main() {
 			poolRead.dispatch(task)
 		}
 	}
+	//time.Sleep(1*time.Minute)
 	result := make(map[string]int)
+	var isClose = false
+	var i = 0;
 	for {
 		var line Line
 		var ok bool
+
 		select {
-		case line,ok = <-lineChan:
+		case line, ok = <-lineChan:
 			if !ok {
-				break;
+				break
 			}
 			sumLine := WordCounter(line.value)
 			for key, value := range sumLine {
 				result[key] = result[key] + value
 			}
 			fmt.Println(result)
+			if len(poolRead.workerPool) == noWorker && isClose == false {
+				close(lineChan)
+				isClose = true
+				break
+			}
+			continue
+		default:
 			continue
 		}
 		if !ok {
 			break
 		}
+
+		fmt.Scanln(i)
+		i++
 	}
 
-	fmt.Scanln()
 
 }
 
@@ -225,7 +241,7 @@ type LocalFileInfo struct {
 func (f LocalFileInfo) read(outPut chan Line) (err error) {
 	fmt.Println("read local file")
 	//add sleep to test task read data need long time to finish
-	time.Sleep(1 * time.Second)
+	//time.Sleep(1 * time.Second)
 	//defer close(outPut)
 	file, err := os.Open(f.Info.Path)
 	if err != nil {
@@ -235,7 +251,10 @@ func (f LocalFileInfo) read(outPut chan Line) (err error) {
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		outPut <- Line{scanner.Text()}
+		line := scanner.Text()
+		//fmt.Println(line)
+		outPut <- Line{line}
+		//fmt.Println(len(outPut))
 	}
 
 	return nil
