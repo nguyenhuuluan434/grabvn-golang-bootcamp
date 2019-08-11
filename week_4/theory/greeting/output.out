@@ -1,0 +1,5 @@
+mode: set
+grabvn-golang-bootcamp/week_4/theory/greeting/hello.go:5.32,6.20 1 1
+grabvn-golang-bootcamp/week_4/theory/greeting/hello.go:9.2,9.38 1 1
+grabvn-golang-bootcamp/week_4/theory/greeting/hello.go:6.20,8.3 1 0
+grabvn-golang-bootcamp/week_4/theory/greeting/main.go:8.13,14.2 4 0
