@@ -38,12 +38,13 @@ func (toDoImplMock) Get(id string) (*protobuf.Todo, error) {
 }
 
 func (toDoImplMock) GetList(limit int32, marker string, complete bool) ([]*protobuf.Todo, error) {
-	return nil, nil
+	return toDos, nil
 }
 
 func (toDoImplMock) Delete(id string) error {
 	return nil
 }
+var toDos []*protobuf.Todo = []*protobuf.Todo{}
 
 func startServer() {
 	todoRepo := &toDoImplMock{}
@@ -81,7 +82,7 @@ func TestToDoService(t *testing.T) {
 		Consumer: "ToDoConsumer",
 		Provider: "ToDoService",
 	}
-
+	pact.DisableToolValidityCheck = true
 	// Verify the Provider using the locally saved Pact Files
 	pact.VerifyProvider(t, types.VerifyRequest{
 		ProviderBaseURL: "http://" + httpAddress,
@@ -89,8 +90,8 @@ func TestToDoService(t *testing.T) {
 		StateHandlers: types.StateHandlers{
 			// Setup any state required by the test
 			// in this case, we ensure there is a "user" in the system
-			"state handler": func() error {
-				//lastName = "crickets"
+			"There are todo A and todo B": func() error {
+				toDos = []*protobuf.Todo{{Id: "id1", Title: "ToDo A"}, {Id: "id2", Title: "ToDo B"}}
 				return nil
 			},
 		},

@@ -1,0 +1,39 @@
+I, [2019-08-12T00:36:58.423731 #16474]  INFO -- : Registered expected interaction DELETE /v1/todo/id1
+D, [2019-08-12T00:36:58.423969 #16474] DEBUG -- : {
+  "description": "A request to list todo",
+  "providerState": "Delete todo with id = id1",
+  "request": {
+    "method": "DELETE",
+    "path": "/v1/todo/id1"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+    }
+  }
+}
+I, [2019-08-12T00:37:02.393110 #16474]  INFO -- : Received request DELETE /v1/todo/id1
+D, [2019-08-12T00:37:02.393481 #16474] DEBUG -- : {
+  "path": "/v1/todo/id1",
+  "query": "",
+  "method": "delete",
+  "headers": {
+    "Content-Type": "application/json",
+    "Host": "localhost:44027",
+    "User-Agent": "Go-http-client/1.1",
+    "Accept-Encoding": "gzip",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2019-08-12T00:37:02.394179 #16474]  INFO -- : Found matching response for DELETE /v1/todo/id1
+D, [2019-08-12T00:37:02.394492 #16474] DEBUG -- : {
+  "status": 200,
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": {
+  }
+}

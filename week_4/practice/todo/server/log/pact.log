@@ -1,0 +1,21 @@
+# Logfile created on 2019-08-11 22:48:23 +0700 by logger.rb/47272
+I, [2019-08-11T22:48:23.418666 #4493]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-11T22:48:23.424245 #4493]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"CONTENT_TYPE"=>"application/json", "HTTP_X_PACT_ORIGINAL_HEADER_NAMES"=>"Content-Type"}, see debug logs for body
+D, [2019-08-11T22:48:23.424358 #4493] DEBUG -- : body :{"completed":true,"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-11T22:48:23.444807 #4493]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Sun, 11 Aug 2019 15:48:23 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-11T22:48:23.444872 #4493] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-11T22:48:23.449266 #4493]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given There are todo A and todo B A request to list todo with GET /v1/todo?limit=3&not_completed=true returns a response which has status code 200'
+I, [2019-08-11T22:48:23.450543 #4493]  INFO -- : Sending GET request to path: "/v1/todo?limit=3&not_completed=true" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"There are todo A and todo B"}]}, see debug logs for body
+D, [2019-08-11T22:48:23.450583 #4493] DEBUG -- : body :
+I, [2019-08-11T22:48:23.452304 #4493]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"101", "Content-Type"=>"application/json", "Date"=>"Sun, 11 Aug 2019 15:48:23 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-11T22:48:23.452343 #4493] DEBUG -- : body: {"responseStatus":{"code":200},"items":[{"id":"id1","title":"ToDo A"},{"id":"id2","title":"ToDo B"}]}
+I, [2019-08-11T22:51:16.925423 #4749]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-11T22:51:16.930782 #4749]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"CONTENT_TYPE"=>"application/json", "HTTP_X_PACT_ORIGINAL_HEADER_NAMES"=>"Content-Type"}, see debug logs for body
+D, [2019-08-11T22:51:16.930880 #4749] DEBUG -- : body :{"completed":true,"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-11T22:51:16.949935 #4749]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Sun, 11 Aug 2019 15:51:16 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-11T22:51:16.949999 #4749] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-11T22:51:16.954334 #4749]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given There are todo A and todo B A request to list todo with GET /v1/todo?limit=3&not_completed=true returns a response which has status code 200'
+I, [2019-08-11T22:51:16.955614 #4749]  INFO -- : Sending GET request to path: "/v1/todo?limit=3&not_completed=true" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"There are todo A and todo B"}]}, see debug logs for body
+D, [2019-08-11T22:51:16.955654 #4749] DEBUG -- : body :
+I, [2019-08-11T22:51:16.957323 #4749]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"101", "Content-Type"=>"application/json", "Date"=>"Sun, 11 Aug 2019 15:51:16 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-11T22:51:16.957383 #4749] DEBUG -- : body: {"responseStatus":{"code":200},"items":[{"id":"id1","title":"ToDo A"},{"id":"id2","title":"ToDo B"}]}
