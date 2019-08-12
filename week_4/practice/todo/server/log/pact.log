@@ -19,3 +19,58 @@ I, [2019-08-11T22:51:16.955614 #4749]  INFO -- : Sending GET request to path: "/
 D, [2019-08-11T22:51:16.955654 #4749] DEBUG -- : body :
 I, [2019-08-11T22:51:16.957323 #4749]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"101", "Content-Type"=>"application/json", "Date"=>"Sun, 11 Aug 2019 15:51:16 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
 D, [2019-08-11T22:51:16.957383 #4749] DEBUG -- : body: {"responseStatus":{"code":200},"items":[{"id":"id1","title":"ToDo A"},{"id":"id2","title":"ToDo B"}]}
+I, [2019-08-12T08:21:45.530770 #18095]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Delete todo with id = id1 A request to list todo with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-12T08:21:45.536176 #18095]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Delete todo with id = id1"}]}, see debug logs for body
+D, [2019-08-12T08:21:45.536235 #18095] DEBUG -- : body :
+I, [2019-08-12T08:21:45.555886 #18095]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 01:21:45 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-12T08:21:45.555950 #18095] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-12T08:23:21.684646 #18492]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-12T08:23:21.690111 #18492]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"CONTENT_TYPE"=>"application/json", "HTTP_X_PACT_ORIGINAL_HEADER_NAMES"=>"Content-Type"}, see debug logs for body
+D, [2019-08-12T08:23:21.690193 #18492] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-12T08:23:21.709092 #18492]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 01:23:21 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-12T08:23:21.709156 #18492] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-12T08:23:21.713847 #18492]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given There are todos A request to list todo with GET /v1/todo?completed=true&limit=3&marker=id1 returns a response which has status code 200'
+I, [2019-08-12T08:23:21.715187 #18492]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=3&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"There are todos"}]}, see debug logs for body
+D, [2019-08-12T08:23:21.715235 #18492] DEBUG -- : body :
+I, [2019-08-12T08:23:21.717126 #18492]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 01:23:21 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-12T08:23:21.717173 #18492] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-12T08:23:21.719439 #18492]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Update todo with id = id1 A request to list todo with PUT /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-12T08:23:21.720743 #18492]  INFO -- : Sending PUT request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Update todo with id = id1"}]}, see debug logs for body
+D, [2019-08-12T08:23:21.720788 #18492] DEBUG -- : body :
+I, [2019-08-12T08:23:21.722483 #18492]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 01:23:21 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-12T08:23:21.722525 #18492] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-12T08:23:21.724515 #18492]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Delete todo with id = id1 A request to list todo with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-12T08:23:21.725802 #18492]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Delete todo with id = id1"}]}, see debug logs for body
+D, [2019-08-12T08:23:21.725848 #18492] DEBUG -- : body :
+I, [2019-08-12T08:23:21.727530 #18492]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 01:23:21 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-12T08:23:21.727575 #18492] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-12T08:23:21.729549 #18492]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Get todo with id = id1 A request to list todo with GET /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-12T08:23:21.730827 #18492]  INFO -- : Sending GET request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Get todo with id = id1"}]}, see debug logs for body
+D, [2019-08-12T08:23:21.730874 #18492] DEBUG -- : body :
+I, [2019-08-12T08:23:21.732556 #18492]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 01:23:21 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-12T08:23:21.732606 #18492] DEBUG -- : body: {"responseStatus":{"code":404}}
+I, [2019-08-12T08:32:25.497469 #20177]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-12T08:32:25.506178 #20177]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"CONTENT_TYPE"=>"application/json", "HTTP_X_PACT_ORIGINAL_HEADER_NAMES"=>"Content-Type"}, see debug logs for body
+D, [2019-08-12T08:32:25.506255 #20177] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-12T08:33:49.984100 #20177]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 01:33:49 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-12T08:33:49.984354 #20177] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-12T08:33:50.002992 #20177]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given There are todos A request to list todo with GET /v1/todo?completed=true&limit=3&marker=id1 returns a response which has status code 200'
+I, [2019-08-12T08:33:50.008359 #20177]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=3&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"There are todos"}]}, see debug logs for body
+D, [2019-08-12T08:33:50.008489 #20177] DEBUG -- : body :
+I, [2019-08-12T08:33:51.367422 #20177]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 01:33:51 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-12T08:33:51.367561 #20177] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-12T08:33:51.371960 #20177]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Update todo with id = id1 A request to list todo with PUT /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-12T08:33:51.373829 #20177]  INFO -- : Sending PUT request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Update todo with id = id1"}]}, see debug logs for body
+D, [2019-08-12T08:33:51.373891 #20177] DEBUG -- : body :
+I, [2019-08-12T08:33:52.058163 #20177]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 01:33:52 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-12T08:33:52.058339 #20177] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-12T08:33:52.065510 #20177]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Delete todo with id = id1 A request to list todo with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-12T08:33:52.070280 #20177]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Delete todo with id = id1"}]}, see debug logs for body
+D, [2019-08-12T08:33:52.070432 #20177] DEBUG -- : body :
+I, [2019-08-12T08:33:52.981849 #20177]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 01:33:52 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-12T08:33:52.982079 #20177] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-12T08:33:52.990461 #20177]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Get todo with id = id1 A request to list todo with GET /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-12T08:33:52.995552 #20177]  INFO -- : Sending GET request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Get todo with id = id1"}]}, see debug logs for body
+D, [2019-08-12T08:33:52.995744 #20177] DEBUG -- : body :
+I, [2019-08-12T08:33:53.907907 #20177]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 01:33:53 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-12T08:33:53.908084 #20177] DEBUG -- : body: {"responseStatus":{"code":404}}

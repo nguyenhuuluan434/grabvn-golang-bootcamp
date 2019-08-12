@@ -75,7 +75,9 @@ func (p *ToDoProxy) CreateToDoWithRequest(todo TodoRequest) (string, error) {
 			message string `json:"message"`
 		} `json:"responseStatus"`
 	}{}
+
 	json.NewDecoder(res.Body).Decode(&createToDoRes)
+	fmt.Println(createToDoRes)
 	return createToDoRes.ID, nil
 }
 

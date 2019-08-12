@@ -44,7 +44,8 @@ func (toDoImplMock) GetList(limit int32, marker string, complete bool) ([]*proto
 func (toDoImplMock) Delete(id string) error {
 	return nil
 }
-var toDos []*protobuf.Todo = []*protobuf.Todo{}
+
+var toDos []*protobuf.Todo
 
 func startServer() {
 	todoRepo := &toDoImplMock{}

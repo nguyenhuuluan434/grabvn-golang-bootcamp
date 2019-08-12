@@ -43,13 +43,13 @@ func TestToDoProxy(t *testing.T) {
 				Status:  200,
 				Headers: dsl.MapMatcher{"Content-Type": dsl.String("application/json")},
 				Body: dsl.Like(map[string]interface{}{
-					//"responseStatus": dsl.Like(map[string]interface{}{
-					//	"code": dsl.Like(int32(200)), "message": dsl.Like("klgt"),
-					//}),
-					"responseStatus": map[string]interface{}{
-						"name":    int32(200),
-						"message": "",
-					},
+					"responseStatus": dsl.Like(map[string]interface{}{
+						"code": dsl.Like(int32(200)), "message": dsl.Like("klgt"),
+					}),
+					//"responseStatus": map[string]interface{}{
+					//	"name":    int32(200),
+					//	"message": "",
+					//},
 					"id": dsl.Like("id1"),
 				}),
 			})
