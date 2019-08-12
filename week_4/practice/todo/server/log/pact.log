@@ -74,3 +74,56 @@ I, [2019-08-12T08:33:52.995552 #20177]  INFO -- : Sending GET request to path: "
 D, [2019-08-12T08:33:52.995744 #20177] DEBUG -- : body :
 I, [2019-08-12T08:33:53.907907 #20177]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 01:33:53 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
 D, [2019-08-12T08:33:53.908084 #20177] DEBUG -- : body: {"responseStatus":{"code":404}}
+I, [2019-08-12T08:44:53.150351 #21834]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-12T08:44:53.159273 #21834]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"CONTENT_TYPE"=>"application/json", "HTTP_X_PACT_ORIGINAL_HEADER_NAMES"=>"Content-Type"}, see debug logs for body
+D, [2019-08-12T08:44:53.159351 #21834] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-12T09:26:44.924613 #29556]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-12T09:26:44.930385 #29556]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"CONTENT_TYPE"=>"application/json", "HTTP_X_PACT_ORIGINAL_HEADER_NAMES"=>"Content-Type"}, see debug logs for body
+D, [2019-08-12T09:26:44.930465 #29556] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-12T09:26:45.032052 #29556]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"75", "Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 02:26:45 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-12T09:26:45.032296 #29556] DEBUG -- : body: {"responseStatus":{"code":200},"id":"e4897115-8e96-4564-a644-a9b6dc652f22"}
+I, [2019-08-12T09:26:45.063141 #29556]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given There are todos A request to list todo with GET /v1/todo?completed=true&limit=3&marker=id1 returns a response which has status code 200'
+I, [2019-08-12T09:26:45.073962 #29556]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=3&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"There are todos"}]}, see debug logs for body
+D, [2019-08-12T09:26:45.074028 #29556] DEBUG -- : body :
+I, [2019-08-12T09:26:45.077398 #29556]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 02:26:45 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"62"}, see debug logs for body
+D, [2019-08-12T09:26:45.077497 #29556] DEBUG -- : body: {"error":"invalid marker","message":"invalid marker","code":2}
+I, [2019-08-12T09:26:45.080643 #29556]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Update todo with id = id1 A request to list todo with PUT /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-12T09:26:45.082254 #29556]  INFO -- : Sending PUT request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Update todo with id = id1"}]}, see debug logs for body
+D, [2019-08-12T09:26:45.082315 #29556] DEBUG -- : body :
+I, [2019-08-12T09:26:45.084788 #29556]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 02:26:45 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
+D, [2019-08-12T09:26:45.084856 #29556] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}
+I, [2019-08-12T09:26:45.087575 #29556]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Delete todo with id = id1 A request to list todo with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-12T09:26:45.088987 #29556]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Delete todo with id = id1"}]}, see debug logs for body
+D, [2019-08-12T09:26:45.089047 #29556] DEBUG -- : body :
+I, [2019-08-12T09:26:45.091308 #29556]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 02:26:45 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
+D, [2019-08-12T09:26:45.091360 #29556] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}
+I, [2019-08-12T09:26:45.093850 #29556]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Get todo with id = id1 A request to list todo with GET /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-12T09:26:45.095309 #29556]  INFO -- : Sending GET request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Get todo with id = id1"}]}, see debug logs for body
+D, [2019-08-12T09:26:45.095357 #29556] DEBUG -- : body :
+I, [2019-08-12T09:26:45.097709 #29556]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 02:26:45 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
+D, [2019-08-12T09:26:45.097765 #29556] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}
+I, [2019-08-12T09:58:30.839359 #1329]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-12T09:58:30.845654 #1329]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"CONTENT_TYPE"=>"application/json", "HTTP_X_PACT_ORIGINAL_HEADER_NAMES"=>"Content-Type"}, see debug logs for body
+D, [2019-08-12T09:58:30.845758 #1329] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-12T09:58:30.883861 #1329]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"75", "Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 02:58:30 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-12T09:58:30.883934 #1329] DEBUG -- : body: {"responseStatus":{"code":200},"id":"f1f23936-6d71-4449-9251-11bdb9ef2e4f"}
+I, [2019-08-12T09:58:30.893508 #1329]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given There are todos A request to list todo with GET /v1/todo?completed=true&limit=10&marker=id1 returns a response which has status code 200'
+I, [2019-08-12T09:58:30.904591 #1329]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=10&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"There are todos"}]}, see debug logs for body
+D, [2019-08-12T09:58:30.904651 #1329] DEBUG -- : body :
+I, [2019-08-12T09:58:30.907531 #1329]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 02:58:30 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"62"}, see debug logs for body
+D, [2019-08-12T09:58:30.907596 #1329] DEBUG -- : body: {"error":"invalid marker","message":"invalid marker","code":2}
+I, [2019-08-12T09:58:30.910219 #1329]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Update todo with id = id1 A request to list todo with PUT /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-12T09:58:30.911602 #1329]  INFO -- : Sending PUT request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Update todo with id = id1"}]}, see debug logs for body
+D, [2019-08-12T09:58:30.911650 #1329] DEBUG -- : body :
+I, [2019-08-12T09:58:30.913837 #1329]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 02:58:30 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
+D, [2019-08-12T09:58:30.913889 #1329] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}
+I, [2019-08-12T09:58:30.917222 #1329]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Delete todo with id = id1 A request to list todo with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-12T09:58:30.918751 #1329]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Delete todo with id = id1"}]}, see debug logs for body
+D, [2019-08-12T09:58:30.918810 #1329] DEBUG -- : body :
+I, [2019-08-12T09:58:30.920978 #1329]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 02:58:30 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
+D, [2019-08-12T09:58:30.921026 #1329] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}
+I, [2019-08-12T09:58:30.923330 #1329]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Get todo with id = id1 A request to list todo with GET /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-12T09:58:30.924613 #1329]  INFO -- : Sending GET request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Get todo with id = id1"}]}, see debug logs for body
+D, [2019-08-12T09:58:30.924657 #1329] DEBUG -- : body :
+I, [2019-08-12T09:58:30.926732 #1329]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 02:58:30 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
+D, [2019-08-12T09:58:30.926794 #1329] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}

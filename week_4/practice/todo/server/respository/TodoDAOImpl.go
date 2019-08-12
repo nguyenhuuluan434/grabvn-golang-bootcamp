@@ -13,9 +13,9 @@ type TodoDAO struct {
 	DB *pg.DB
 }
 
-func (t TodoDAO) Create(item *protobuf.CreateTodoRequest) (id string, err error) {
+func (t TodoDAO) Create(req *protobuf.CreateTodoRequest) (id string, err error) {
 	id = uuid.New().String()
-	entity := protobuf.Todo{Id: id, Title: item.Item.Title, Description: item.Item.Description, Completed: false, Deleted: false, CreatedAt: &timestamp.Timestamp{Seconds: time.Now().Unix()}, UpdatedAt: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
+	entity := protobuf.Todo{Id: id, Title: req.Item.Title, Description: req.Item.Description, Completed: false, Deleted: false, CreatedAt: &timestamp.Timestamp{Seconds: time.Now().Unix()}, UpdatedAt: &timestamp.Timestamp{Seconds: time.Now().Unix()}}
 	err = t.DB.Insert(&entity)
 	return
 }
@@ -51,7 +51,7 @@ func (t TodoDAO) GetList(limit int32, marker string, complete bool) ([]*protobuf
 		return nil, errors.New("invalid marker")
 	}
 	var items []*protobuf.Todo
-	query := t.DB.Model(&items).Order("created_at ASC").Where("created_at >= ?", timestamp.Timestamp{Seconds: todoMarker.CreatedAt.Seconds})
+	query := t.DB.Model(&items).Order("created_at ASC").Where("CAST (created_at -> 'seconds' AS INTEGER )  >= ?", timestamp.Timestamp{Seconds: todoMarker.CreatedAt.Seconds}.Seconds)
 	if limit > 0 {
 		query.Limit(int(limit))
 	}

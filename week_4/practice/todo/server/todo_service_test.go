@@ -3,7 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/go-pg/pg"
 	"grabvn-golang-bootcamp/week_4/practice/todo/protobuf"
+	"grabvn-golang-bootcamp/week_4/practice/todo/server/respository"
 	"grabvn-golang-bootcamp/week_4/practice/todo/server/service"
 	"log"
 	"net"
@@ -11,6 +13,7 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+	"time"
 
 	"github.com/pact-foundation/pact-go/dsl"
 
@@ -48,9 +51,18 @@ func (toDoImplMock) Delete(id string) error {
 var toDos []*protobuf.Todo
 
 func startServer() {
-	todoRepo := &toDoImplMock{}
+	//todoRepo := &toDoImplMock{}
+	db := pg.Connect(&pg.Options{
+		User:                  "postgres",
+		Password:              "example",
+		Database:              "todo",
+		Addr:                  "localhost" + ":" + "5433",
+		RetryStatementTimeout: true,
+		MaxRetries:            4,
+		MinRetryBackoff:       250 * time.Millisecond,
+	})
 	s := grpc.NewServer()
-	protobuf.RegisterTodoServiceServer(s, service.TodoService{TodoDao: todoRepo})
+	protobuf.RegisterTodoServiceServer(s, service.TodoService{TodoDao: respository.TodoDAO{DB:db}})
 
 	lis, err := net.Listen("tcp", grpcAddress)
 	if err != nil {

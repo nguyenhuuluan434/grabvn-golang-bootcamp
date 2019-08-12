@@ -63,14 +63,15 @@ func (s *ToDoRepositorySuite) TestDAO() {
 
 	s.Nil(err)
 
-
 	newTodo, err := s.todoDAO.Get(id)
 	s.Nil(err)
 	s.NotNil(newTodo)
-	err = s.todoDAO.Update(id,&protobuf.UpdateTodoRequest{Id:id,Item:&protobuf.TodoRequestUpdateInfo{Title:"item 2"}})
+
+	err =s.todoDAO.Update(id,&protobuf.TodoRequestUpdateInfo{Title:"item 2"})
+
 	s.Nil(err)
 
-	err = s.todoDAO.Update(id1,&protobuf.UpdateTodoRequest{Id:id1,Item:&protobuf.TodoRequestUpdateInfo{Title:"item klgt",Completed:true}})
+	err =s.todoDAO.Update(id,&protobuf.TodoRequestUpdateInfo{Title:"item klgt",Completed:true})
 	s.Nil(err)
 
 	items ,err :=s.todoDAO.GetList(int32(10),id1,false)

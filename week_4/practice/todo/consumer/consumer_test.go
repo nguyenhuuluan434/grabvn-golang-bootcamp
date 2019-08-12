@@ -40,16 +40,12 @@ func TestToDoProxy(t *testing.T) {
 				},
 			}).
 			WillRespondWith(dsl.Response{
-				Status:  200,
+				Status:  http.StatusOK,
 				Headers: dsl.MapMatcher{"Content-Type": dsl.String("application/json")},
 				Body: dsl.Like(map[string]interface{}{
 					"responseStatus": dsl.Like(map[string]interface{}{
-						"code": dsl.Like(int32(200)), "message": dsl.Like("klgt"),
+						"code": dsl.Like(int32(http.StatusOK)), "message": dsl.Like("klgt"),
 					}),
-					//"responseStatus": map[string]interface{}{
-					//	"name":    int32(200),
-					//	"message": "",
-					//},
 					"id": dsl.Like("id1"),
 				}),
 			})
@@ -76,22 +72,21 @@ func TestToDoProxy(t *testing.T) {
 			WithRequest(dsl.Request{
 				Method: http.MethodGet,
 				Path:   dsl.String("/v1/todo"),
-				Query:  dsl.MapMatcher{"limit": dsl.String("3"), "completed": dsl.String("true"), "marker": dsl.String("id1")},
+				Query:  dsl.MapMatcher{"limit": dsl.String("10"), "completed": dsl.String("true"), "marker": dsl.String("id1")},
 			}).WillRespondWith(dsl.Response{
-			Status:  200,
+			Status:  http.StatusOK,
 			Headers: dsl.MapMatcher{"Content-Type": dsl.String("application/json")},
 			Body: dsl.Like(map[string]interface{}{
 				"items": dsl.Like([]interface{}{
 					dsl.Like(map[string]interface{}{"id": dsl.Like("id1"), "title": dsl.Like("ToDo A")}),
 					dsl.Like(map[string]interface{}{"id": dsl.Like("id2"), "title": dsl.Like("ToDo B")}),
-					dsl.Like(map[string]interface{}{"id": dsl.Like("id3"), "title": dsl.Like("ToDo C")}),
 				}),
 			}),
 		})
 
 		test := func() (err error) {
 			proxy := ToDoProxy{Host: "localhost", Port: pact.Server.Port}
-			resp, err := proxy.GetListToDo(3, "id1", true)
+			resp, err := proxy.GetListToDo(10, "id1", true)
 
 			if err != nil {
 				return err
@@ -112,16 +107,12 @@ func TestToDoProxy(t *testing.T) {
 				Method: http.MethodPut,
 				Path:   dsl.String(fmt.Sprintf("/v1/todo/%s", id)),
 			}).WillRespondWith(dsl.Response{
-			Status:  200,
+			Status:  http.StatusOK,
 			Headers: dsl.MapMatcher{"Content-Type": dsl.String("application/json")},
 			Body: dsl.Like(map[string]interface{}{
-				//"responseStatus": dsl.Like(map[string]interface{}{
-				//	"code": dsl.Like(int32(200)), "message": dsl.Like("klgt"),
-				//}),
-				"responseStatus": map[string]interface{}{
-					"name":    int32(200),
-					"message": "",
-				},
+				"responseStatus": dsl.Like(map[string]interface{}{
+					"code": dsl.Like(int32(http.StatusOK)), "message": dsl.Like(""),
+				}),
 			}),
 		})
 
@@ -147,11 +138,12 @@ func TestToDoProxy(t *testing.T) {
 				Method: http.MethodDelete,
 				Path:   dsl.String(fmt.Sprintf("/v1/todo/%s", id)),
 			}).WillRespondWith(dsl.Response{
-			Status:  200,
+			Status:  http.StatusOK,
 			Headers: dsl.MapMatcher{"Content-Type": dsl.String("application/json")},
 			Body: dsl.Like(map[string]interface{}{
+				//test another way to create data response body
 				"responseStatus":map[string]interface{}{
-					"name":int32(200) ,
+					"name":int32(http.StatusOK) ,
 					"message": "",
 				},
 			}),
@@ -179,12 +171,12 @@ func TestToDoProxy(t *testing.T) {
 				Method: http.MethodGet,
 				Path:   dsl.String(fmt.Sprintf("/v1/todo/%s", id)),
 			}).WillRespondWith(dsl.Response{
-			Status:  200,
+			Status:  http.StatusOK,
 			Headers: dsl.MapMatcher{"Content-Type": dsl.String("application/json")},
 			Body: dsl.Like(map[string]interface{}{
 				"todo": dsl.Like(map[string]interface{}{"id": dsl.Like("id1"), "title": dsl.Like("ToDo A")}),
 				"responseStatus": map[string]interface{}{
-					"name":    int32(200),
+					"name":    int32(http.StatusOK),
 					"message": "",
 				},
 			}),
