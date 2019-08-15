@@ -1,0 +1,4 @@
+# this command will set variable VersionString in import path name main with value of `git rev-parse HEAD`
+go run -ldflags "-X main.VersionString=`git rev-parse HEAD`" main.go
+go run -ldflags "-X 'main.VersionString=1.0 (beta)'" main.go
+go run -ldflags "-X 'main.VersionString=`date`'" main.go
