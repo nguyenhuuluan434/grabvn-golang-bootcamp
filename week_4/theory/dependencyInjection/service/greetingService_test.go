@@ -34,7 +34,7 @@ func Test_greeter_Greet(t *testing.T) {
 		want   string
 	}{
 		// TODO: Add test cases.
-		{name: "test en", fields: fields{lang: "vi", database: dbMock}, want: "aaa",returnVal:"aaa"},
+		{name: "test en", fields: fields{lang: mock.Anything, database: dbMock}, want: mock.Anything,returnVal:"aaa"},
 		{name: "test vn", fields: fields{lang: "en", database: dbMock}, want: "123",returnVal:"123"},
 		{name: "test df", fields: fields{lang: "", database: dbMock}, want: "",returnVal:""},
 	}
@@ -49,6 +49,7 @@ func Test_greeter_Greet(t *testing.T) {
 			if got := g.Greet(); got != tt.want {
 				t.Errorf("greeter.Greet() = %v, want %v", got, tt.want)
 			}
+
 		})
 	}
 }
