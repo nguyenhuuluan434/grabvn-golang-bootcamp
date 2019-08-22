@@ -58,7 +58,7 @@ func main() {
 			writer.WriteHeader(500)
 		}
 
-		writer.Header().Set("Content-Type", "application/json")
+		writer.Header().Set("Content-Type", "application/xml")
 		_, err = writer.Write(buf)
 	})
 

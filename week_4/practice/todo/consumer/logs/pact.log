@@ -1,99 +1,7 @@
-I, [2019-08-12T09:58:17.884744 #998]  INFO -- : Registered expected interaction POST /v1/todo
-D, [2019-08-12T09:58:17.885060 #998] DEBUG -- : {
-  "description": "A request to create todo",
-  "request": {
-    "method": "POST",
-    "path": "/v1/todo",
-    "headers": {
-      "Content-Type": "application/json"
-    },
-    "body": {
-      "description": "discuss about OKRs",
-      "title": "1-1 with manager"
-    }
-  },
-  "response": {
-    "status": 200,
-    "headers": {
-      "Content-Type": "application/json"
-    },
-    "body": {
-      "json_class": "Pact::SomethingLike",
-      "contents": {
-        "id": {
-          "json_class": "Pact::SomethingLike",
-          "contents": "id1"
-        },
-        "responseStatus": {
-          "json_class": "Pact::SomethingLike",
-          "contents": {
-            "code": {
-              "json_class": "Pact::SomethingLike",
-              "contents": 200
-            },
-            "message": {
-              "json_class": "Pact::SomethingLike",
-              "contents": "klgt"
-            }
-          }
-        }
-      }
-    }
-  }
-}
-I, [2019-08-12T09:58:17.887420 #998]  INFO -- : Received request POST /v1/todo
-D, [2019-08-12T09:58:17.887534 #998] DEBUG -- : {
-  "path": "/v1/todo",
-  "query": "",
-  "method": "post",
-  "body": {
-    "title": "1-1 with manager",
-    "description": "discuss about OKRs"
-  },
-  "headers": {
-    "Content-Length": "63",
-    "Content-Type": "application/json",
-    "Host": "localhost:44595",
-    "User-Agent": "Go-http-client/1.1",
-    "Accept-Encoding": "gzip",
-    "Version": "HTTP/1.1"
-  }
-}
-I, [2019-08-12T09:58:17.887828 #998]  INFO -- : Found matching response for POST /v1/todo
-D, [2019-08-12T09:58:17.887991 #998] DEBUG -- : {
-  "status": 200,
-  "headers": {
-    "Content-Type": "application/json"
-  },
-  "body": {
-    "json_class": "Pact::SomethingLike",
-    "contents": {
-      "id": {
-        "json_class": "Pact::SomethingLike",
-        "contents": "id1"
-      },
-      "responseStatus": {
-        "json_class": "Pact::SomethingLike",
-        "contents": {
-          "code": {
-            "json_class": "Pact::SomethingLike",
-            "contents": 200
-          },
-          "message": {
-            "json_class": "Pact::SomethingLike",
-            "contents": "klgt"
-          }
-        }
-      }
-    }
-  }
-}
-I, [2019-08-12T09:58:17.934007 #998]  INFO -- : Verifying - interactions matched
-I, [2019-08-12T09:58:17.984181 #998]  INFO -- : Cleared interactions
-I, [2019-08-12T09:58:18.036410 #998]  INFO -- : Registered expected interaction GET /v1/todo?completed=true&limit=10&marker=id1
-D, [2019-08-12T09:58:18.037600 #998] DEBUG -- : {
+I, [2019-08-22T14:49:43.461941 #21468]  INFO -- : Registered expected interaction GET /v1/todo?completed=true&limit=10&marker=id1
+D, [2019-08-22T14:49:43.462364 #21468] DEBUG -- : {
   "description": "A request to list todo",
-  "providerState": "There are todos",
+  "providerState": "Todos existing on Api",
   "request": {
     "method": "GET",
     "path": "/v1/todo",
@@ -145,19 +53,6 @@ D, [2019-08-12T09:58:18.037600 #998] DEBUG -- : {
                   "contents": "ToDo B"
                 }
               }
-            },
-            {
-              "json_class": "Pact::SomethingLike",
-              "contents": {
-                "id": {
-                  "json_class": "Pact::SomethingLike",
-                  "contents": "id3"
-                },
-                "title": {
-                  "json_class": "Pact::SomethingLike",
-                  "contents": "ToDo C"
-                }
-              }
             }
           ]
         }
@@ -165,20 +60,20 @@ D, [2019-08-12T09:58:18.037600 #998] DEBUG -- : {
     }
   }
 }
-I, [2019-08-12T09:58:18.090308 #998]  INFO -- : Received request GET /v1/todo?limit=10&completed=true&marker=id1
-D, [2019-08-12T09:58:18.090721 #998] DEBUG -- : {
+I, [2019-08-22T14:49:43.464795 #21468]  INFO -- : Received request GET /v1/todo?limit=10&completed=true&marker=id1
+D, [2019-08-22T14:49:43.464895 #21468] DEBUG -- : {
   "path": "/v1/todo",
   "query": "limit=10&completed=true&marker=id1",
   "method": "get",
   "headers": {
-    "Host": "localhost:44595",
+    "Host": "localhost:37591",
     "User-Agent": "Go-http-client/1.1",
     "Accept-Encoding": "gzip",
     "Version": "HTTP/1.1"
   }
 }
-I, [2019-08-12T09:58:18.092251 #998]  INFO -- : Found matching response for GET /v1/todo?completed=true&limit=10&marker=id1
-D, [2019-08-12T09:58:18.093196 #998] DEBUG -- : {
+I, [2019-08-22T14:49:43.465352 #21468]  INFO -- : Found matching response for GET /v1/todo?completed=true&limit=10&marker=id1
+D, [2019-08-22T14:49:43.465590 #21468] DEBUG -- : {
   "status": 200,
   "headers": {
     "Content-Type": "application/json"
@@ -214,258 +109,11 @@ D, [2019-08-12T09:58:18.093196 #998] DEBUG -- : {
                 "contents": "ToDo B"
               }
             }
-          },
-          {
-            "json_class": "Pact::SomethingLike",
-            "contents": {
-              "id": {
-                "json_class": "Pact::SomethingLike",
-                "contents": "id3"
-              },
-              "title": {
-                "json_class": "Pact::SomethingLike",
-                "contents": "ToDo C"
-              }
-            }
           }
         ]
       }
     }
   }
 }
-I, [2019-08-12T09:58:18.146403 #998]  INFO -- : Verifying - interactions matched
-I, [2019-08-12T09:58:18.196037 #998]  INFO -- : Cleared interactions
-I, [2019-08-12T09:58:18.241068 #998]  INFO -- : Registered expected interaction PUT /v1/todo/id1
-D, [2019-08-12T09:58:18.241305 #998] DEBUG -- : {
-  "description": "A request to list todo",
-  "providerState": "Update todo with id = id1",
-  "request": {
-    "method": "PUT",
-    "path": "/v1/todo/id1"
-  },
-  "response": {
-    "status": 200,
-    "headers": {
-      "Content-Type": "application/json"
-    },
-    "body": {
-      "json_class": "Pact::SomethingLike",
-      "contents": {
-        "responseStatus": {
-          "json_class": "Pact::SomethingLike",
-          "contents": {
-            "code": {
-              "json_class": "Pact::SomethingLike",
-              "contents": 200
-            },
-            "message": {
-              "json_class": "Pact::SomethingLike",
-              "contents": ""
-            }
-          }
-        }
-      }
-    }
-  }
-}
-I, [2019-08-12T09:58:18.291071 #998]  INFO -- : Received request PUT /v1/todo/id1
-D, [2019-08-12T09:58:18.291607 #998] DEBUG -- : {
-  "path": "/v1/todo/id1",
-  "query": "",
-  "method": "put",
-  "body": {
-    "title": "only update title",
-    "completed": true
-  },
-  "headers": {
-    "Content-Length": "46",
-    "Content-Type": "application/json",
-    "Host": "localhost:44595",
-    "User-Agent": "Go-http-client/1.1",
-    "Accept-Encoding": "gzip",
-    "Version": "HTTP/1.1"
-  }
-}
-I, [2019-08-12T09:58:18.292294 #998]  INFO -- : Found matching response for PUT /v1/todo/id1
-D, [2019-08-12T09:58:18.292955 #998] DEBUG -- : {
-  "status": 200,
-  "headers": {
-    "Content-Type": "application/json"
-  },
-  "body": {
-    "json_class": "Pact::SomethingLike",
-    "contents": {
-      "responseStatus": {
-        "json_class": "Pact::SomethingLike",
-        "contents": {
-          "code": {
-            "json_class": "Pact::SomethingLike",
-            "contents": 200
-          },
-          "message": {
-            "json_class": "Pact::SomethingLike",
-            "contents": ""
-          }
-        }
-      }
-    }
-  }
-}
-I, [2019-08-12T09:58:18.345439 #998]  INFO -- : Verifying - interactions matched
-I, [2019-08-12T09:58:18.397737 #998]  INFO -- : Cleared interactions
-I, [2019-08-12T09:58:18.452662 #998]  INFO -- : Registered expected interaction DELETE /v1/todo/id1
-D, [2019-08-12T09:58:18.453243 #998] DEBUG -- : {
-  "description": "A request to list todo",
-  "providerState": "Delete todo with id = id1",
-  "request": {
-    "method": "DELETE",
-    "path": "/v1/todo/id1"
-  },
-  "response": {
-    "status": 200,
-    "headers": {
-      "Content-Type": "application/json"
-    },
-    "body": {
-      "json_class": "Pact::SomethingLike",
-      "contents": {
-        "responseStatus": {
-          "message": "",
-          "name": 200
-        }
-      }
-    }
-  }
-}
-I, [2019-08-12T09:58:18.506605 #998]  INFO -- : Received request DELETE /v1/todo/id1
-D, [2019-08-12T09:58:18.507228 #998] DEBUG -- : {
-  "path": "/v1/todo/id1",
-  "query": "",
-  "method": "delete",
-  "headers": {
-    "Content-Type": "application/json",
-    "Host": "localhost:44595",
-    "User-Agent": "Go-http-client/1.1",
-    "Accept-Encoding": "gzip",
-    "Version": "HTTP/1.1"
-  }
-}
-I, [2019-08-12T09:58:18.507988 #998]  INFO -- : Found matching response for DELETE /v1/todo/id1
-D, [2019-08-12T09:58:18.508395 #998] DEBUG -- : {
-  "status": 200,
-  "headers": {
-    "Content-Type": "application/json"
-  },
-  "body": {
-    "json_class": "Pact::SomethingLike",
-    "contents": {
-      "responseStatus": {
-        "message": "",
-        "name": 200
-      }
-    }
-  }
-}
-I, [2019-08-12T09:58:18.561244 #998]  INFO -- : Registered expected interaction DELETE /v1/todo/id1
-D, [2019-08-12T09:58:18.561800 #998] DEBUG -- : {
-  "description": "A request to list todo",
-  "providerState": "Delete todo with id = id1",
-  "request": {
-    "method": "DELETE",
-    "path": "/v1/todo/id1"
-  },
-  "response": {
-    "status": 200,
-    "headers": {
-      "Content-Type": "application/json"
-    },
-    "body": {
-      "json_class": "Pact::SomethingLike",
-      "contents": {
-        "responseStatus": {
-          "message": "",
-          "name": 200
-        }
-      }
-    }
-  }
-}
-I, [2019-08-12T09:58:18.615170 #998]  INFO -- : Registered expected interaction GET /v1/todo/id1
-D, [2019-08-12T09:58:18.616011 #998] DEBUG -- : {
-  "description": "A request to list todo",
-  "providerState": "Get todo with id = id1",
-  "request": {
-    "method": "GET",
-    "path": "/v1/todo/id1"
-  },
-  "response": {
-    "status": 200,
-    "headers": {
-      "Content-Type": "application/json"
-    },
-    "body": {
-      "json_class": "Pact::SomethingLike",
-      "contents": {
-        "responseStatus": {
-          "message": "",
-          "name": 200
-        },
-        "todo": {
-          "json_class": "Pact::SomethingLike",
-          "contents": {
-            "id": {
-              "json_class": "Pact::SomethingLike",
-              "contents": "id1"
-            },
-            "title": {
-              "json_class": "Pact::SomethingLike",
-              "contents": "ToDo A"
-            }
-          }
-        }
-      }
-    }
-  }
-}
-I, [2019-08-12T09:58:18.666337 #998]  INFO -- : Received request GET /v1/todo/id1
-D, [2019-08-12T09:58:18.666771 #998] DEBUG -- : {
-  "path": "/v1/todo/id1",
-  "query": "",
-  "method": "get",
-  "headers": {
-    "Content-Type": "application/json",
-    "Host": "localhost:44595",
-    "User-Agent": "Go-http-client/1.1",
-    "Accept-Encoding": "gzip",
-    "Version": "HTTP/1.1"
-  }
-}
-I, [2019-08-12T09:58:18.667962 #998]  INFO -- : Found matching response for GET /v1/todo/id1
-D, [2019-08-12T09:58:18.668620 #998] DEBUG -- : {
-  "status": 200,
-  "headers": {
-    "Content-Type": "application/json"
-  },
-  "body": {
-    "json_class": "Pact::SomethingLike",
-    "contents": {
-      "responseStatus": {
-        "message": "",
-        "name": 200
-      },
-      "todo": {
-        "json_class": "Pact::SomethingLike",
-        "contents": {
-          "id": {
-            "json_class": "Pact::SomethingLike",
-            "contents": "id1"
-          },
-          "title": {
-            "json_class": "Pact::SomethingLike",
-            "contents": "ToDo A"
-          }
-        }
-      }
-    }
-  }
-}
+I, [2019-08-22T14:49:43.511763 #21468]  INFO -- : Verifying - interactions matched
+I, [2019-08-22T14:49:43.555529 #21468]  INFO -- : Cleared interactions

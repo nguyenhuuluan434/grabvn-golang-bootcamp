@@ -127,3 +127,266 @@ I, [2019-08-12T09:58:30.924613 #1329]  INFO -- : Sending GET request to path: "/
 D, [2019-08-12T09:58:30.924657 #1329] DEBUG -- : body :
 I, [2019-08-12T09:58:30.926732 #1329]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Mon, 12 Aug 2019 02:58:30 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
 D, [2019-08-12T09:58:30.926794 #1329] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}
+I, [2019-08-20T17:53:19.957150 #16393]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todo exists A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-20T17:53:19.967757 #16393]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todo exists"}]}, see debug logs for body
+D, [2019-08-20T17:53:19.967887 #16393] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-20T17:53:21.172189 #16393]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:53:21 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"138"}, see debug logs for body
+D, [2019-08-20T17:53:21.172263 #16393] DEBUG -- : body: {"error":"dial tcp 127.0.0.1:5433: connect: connection refused","message":"dial tcp 127.0.0.1:5433: connect: connection refused","code":2}
+I, [2019-08-20T17:53:21.179794 #16393]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todos existing on Api A request to list todo with GET /v1/todo?completed=true&limit=10&marker=id1 returns a response which has status code 200'
+I, [2019-08-20T17:53:21.181360 #16393]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=10&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todos existing on Api"}]}, see debug logs for body
+D, [2019-08-20T17:53:21.181429 #16393] DEBUG -- : body :
+I, [2019-08-20T17:53:23.239490 #16393]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:53:23 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"62"}, see debug logs for body
+D, [2019-08-20T17:53:23.239566 #16393] DEBUG -- : body: {"error":"invalid marker","message":"invalid marker","code":2}
+I, [2019-08-20T17:53:23.242265 #16393]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to update todo with PUT /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T17:53:23.243903 #16393]  INFO -- : Sending PUT request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T17:53:23.243957 #16393] DEBUG -- : body :
+I, [2019-08-20T17:53:24.935370 #16393]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:53:24 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"138"}, see debug logs for body
+D, [2019-08-20T17:53:24.935461 #16393] DEBUG -- : body: {"error":"dial tcp 127.0.0.1:5433: connect: connection refused","message":"dial tcp 127.0.0.1:5433: connect: connection refused","code":2}
+I, [2019-08-20T17:53:24.940684 #16393]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to delete todo with id1 with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T17:53:24.942530 #16393]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T17:53:24.942591 #16393] DEBUG -- : body :
+I, [2019-08-20T17:53:27.544605 #16393]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:53:27 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"138"}, see debug logs for body
+D, [2019-08-20T17:53:27.544670 #16393] DEBUG -- : body: {"error":"dial tcp 127.0.0.1:5433: connect: connection refused","message":"dial tcp 127.0.0.1:5433: connect: connection refused","code":2}
+I, [2019-08-20T17:53:27.547059 #16393]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id1 exists A request to get todo with id = id1 with GET /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T17:53:27.548534 #16393]  INFO -- : Sending GET request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id1 exists"}]}, see debug logs for body
+D, [2019-08-20T17:53:27.548590 #16393] DEBUG -- : body :
+I, [2019-08-20T17:53:30.580767 #16393]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:53:30 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"138"}, see debug logs for body
+D, [2019-08-20T17:53:30.580976 #16393] DEBUG -- : body: {"error":"dial tcp 127.0.0.1:5433: connect: connection refused","message":"dial tcp 127.0.0.1:5433: connect: connection refused","code":2}
+I, [2019-08-20T17:54:15.280566 #16785]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todo exists A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-20T17:54:15.288585 #16785]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todo exists"}]}, see debug logs for body
+D, [2019-08-20T17:54:15.288681 #16785] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-20T17:54:16.495764 #16785]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:54:16 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"138"}, see debug logs for body
+D, [2019-08-20T17:54:16.495848 #16785] DEBUG -- : body: {"error":"dial tcp 127.0.0.1:5433: connect: connection refused","message":"dial tcp 127.0.0.1:5433: connect: connection refused","code":2}
+I, [2019-08-20T17:54:16.502397 #16785]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todos existing on Api A request to list todo with GET /v1/todo?completed=true&limit=10&marker=id1 returns a response which has status code 200'
+I, [2019-08-20T17:54:16.503974 #16785]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=10&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todos existing on Api"}]}, see debug logs for body
+D, [2019-08-20T17:54:16.504028 #16785] DEBUG -- : body :
+I, [2019-08-20T17:54:18.559676 #16785]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:54:18 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"62"}, see debug logs for body
+D, [2019-08-20T17:54:18.559801 #16785] DEBUG -- : body: {"error":"invalid marker","message":"invalid marker","code":2}
+I, [2019-08-20T17:54:18.562436 #16785]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to update todo with PUT /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T17:54:18.563853 #16785]  INFO -- : Sending PUT request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T17:54:18.563900 #16785] DEBUG -- : body :
+I, [2019-08-20T17:54:20.255347 #16785]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:54:20 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"138"}, see debug logs for body
+D, [2019-08-20T17:54:20.255418 #16785] DEBUG -- : body: {"error":"dial tcp 127.0.0.1:5433: connect: connection refused","message":"dial tcp 127.0.0.1:5433: connect: connection refused","code":2}
+I, [2019-08-20T17:54:20.257737 #16785]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to delete todo with id1 with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T17:54:20.259062 #16785]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T17:54:20.259108 #16785] DEBUG -- : body :
+I, [2019-08-20T17:54:22.863441 #16785]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:54:22 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"138"}, see debug logs for body
+D, [2019-08-20T17:54:22.863661 #16785] DEBUG -- : body: {"error":"dial tcp 127.0.0.1:5433: connect: connection refused","message":"dial tcp 127.0.0.1:5433: connect: connection refused","code":2}
+I, [2019-08-20T17:54:22.872613 #16785]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id1 exists A request to get todo with id = id1 with GET /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T17:54:22.877133 #16785]  INFO -- : Sending GET request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id1 exists"}]}, see debug logs for body
+D, [2019-08-20T17:54:22.877306 #16785] DEBUG -- : body :
+I, [2019-08-20T17:54:25.911278 #16785]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:54:25 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"138"}, see debug logs for body
+D, [2019-08-20T17:54:25.911360 #16785] DEBUG -- : body: {"error":"dial tcp 127.0.0.1:5433: connect: connection refused","message":"dial tcp 127.0.0.1:5433: connect: connection refused","code":2}
+I, [2019-08-20T17:55:32.190954 #17218]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todo exists A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-20T17:55:32.198526 #17218]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todo exists"}]}, see debug logs for body
+D, [2019-08-20T17:55:32.198624 #17218] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-20T17:55:33.425717 #17218]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:55:33 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"138"}, see debug logs for body
+D, [2019-08-20T17:55:33.425929 #17218] DEBUG -- : body: {"error":"dial tcp 127.0.0.1:5433: connect: connection refused","message":"dial tcp 127.0.0.1:5433: connect: connection refused","code":2}
+I, [2019-08-20T17:55:33.473361 #17218]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todos existing on Api A request to list todo with GET /v1/todo?completed=true&limit=10&marker=id1 returns a response which has status code 200'
+I, [2019-08-20T17:55:33.475104 #17218]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=10&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todos existing on Api"}]}, see debug logs for body
+D, [2019-08-20T17:55:33.475159 #17218] DEBUG -- : body :
+I, [2019-08-20T17:55:35.534616 #17218]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:55:35 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"62"}, see debug logs for body
+D, [2019-08-20T17:55:35.534830 #17218] DEBUG -- : body: {"error":"invalid marker","message":"invalid marker","code":2}
+I, [2019-08-20T17:55:35.544939 #17218]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to update todo with PUT /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T17:55:35.550283 #17218]  INFO -- : Sending PUT request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T17:55:35.550707 #17218] DEBUG -- : body :
+I, [2019-08-20T17:55:37.249187 #17218]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:55:37 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"138"}, see debug logs for body
+D, [2019-08-20T17:55:37.249411 #17218] DEBUG -- : body: {"error":"dial tcp 127.0.0.1:5433: connect: connection refused","message":"dial tcp 127.0.0.1:5433: connect: connection refused","code":2}
+I, [2019-08-20T17:55:37.260588 #17218]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to delete todo with id1 with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T17:55:37.265772 #17218]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T17:55:37.265964 #17218] DEBUG -- : body :
+I, [2019-08-20T17:55:39.876917 #17218]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:55:39 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"138"}, see debug logs for body
+D, [2019-08-20T17:55:39.877157 #17218] DEBUG -- : body: {"error":"dial tcp 127.0.0.1:5433: connect: connection refused","message":"dial tcp 127.0.0.1:5433: connect: connection refused","code":2}
+I, [2019-08-20T17:55:39.886304 #17218]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to get todo with id = id1 with GET /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T17:55:39.891339 #17218]  INFO -- : Sending GET request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T17:55:39.891542 #17218] DEBUG -- : body :
+I, [2019-08-20T17:55:42.924821 #17218]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:55:42 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"138"}, see debug logs for body
+D, [2019-08-20T17:55:42.924888 #17218] DEBUG -- : body: {"error":"dial tcp 127.0.0.1:5433: connect: connection refused","message":"dial tcp 127.0.0.1:5433: connect: connection refused","code":2}
+I, [2019-08-20T17:57:35.037175 #20132]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todo exists A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-20T17:57:35.049516 #20132]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todo exists"}]}, see debug logs for body
+D, [2019-08-20T17:57:35.049618 #20132] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-20T17:57:35.090213 #20132]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"75", "Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:57:35 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-20T17:57:35.090289 #20132] DEBUG -- : body: {"responseStatus":{"code":200},"id":"b2487397-0189-443e-a492-46e810a5a729"}
+I, [2019-08-20T17:57:35.099187 #20132]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todos existing on Api A request to list todo with GET /v1/todo?completed=true&limit=10&marker=id1 returns a response which has status code 200'
+I, [2019-08-20T17:57:35.100968 #20132]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=10&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todos existing on Api"}]}, see debug logs for body
+D, [2019-08-20T17:57:35.101022 #20132] DEBUG -- : body :
+I, [2019-08-20T17:57:35.110614 #20132]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:57:35 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"62"}, see debug logs for body
+D, [2019-08-20T17:57:35.110699 #20132] DEBUG -- : body: {"error":"invalid marker","message":"invalid marker","code":2}
+I, [2019-08-20T17:57:35.113738 #20132]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to update todo with PUT /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T17:57:35.115444 #20132]  INFO -- : Sending PUT request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T17:57:35.115498 #20132] DEBUG -- : body :
+I, [2019-08-20T17:57:35.118323 #20132]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:57:35 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
+D, [2019-08-20T17:57:35.118389 #20132] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}
+I, [2019-08-20T17:57:35.121123 #20132]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to delete todo with id1 with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T17:57:35.122850 #20132]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T17:57:35.122934 #20132] DEBUG -- : body :
+I, [2019-08-20T17:57:35.125598 #20132]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:57:35 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
+D, [2019-08-20T17:57:35.125663 #20132] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}
+I, [2019-08-20T17:57:35.128334 #20132]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to get todo with id = id1 with GET /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T17:57:35.129976 #20132]  INFO -- : Sending GET request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T17:57:35.130026 #20132] DEBUG -- : body :
+I, [2019-08-20T17:57:35.132679 #20132]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 10:57:35 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
+D, [2019-08-20T17:57:35.132740 #20132] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}
+I, [2019-08-20T18:00:01.308323 #20493]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todo exists A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-20T18:00:01.318737 #20493]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todo exists"}]}, see debug logs for body
+D, [2019-08-20T18:00:01.318878 #20493] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-20T18:00:47.067956 #20493]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"75", "Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 11:00:46 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-20T18:00:47.068053 #20493] DEBUG -- : body: {"responseStatus":{"code":200},"id":"f0d506c2-56f8-4e02-a40b-9409e7cbe96a"}
+I, [2019-08-20T18:00:47.075717 #20493]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todos existing on Api A request to list todo with GET /v1/todo?completed=true&limit=10&marker=id1 returns a response which has status code 200'
+I, [2019-08-20T18:00:47.566091 #20493]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=10&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todos existing on Api"}]}, see debug logs for body
+D, [2019-08-20T18:00:47.566228 #20493] DEBUG -- : body :
+I, [2019-08-20T18:00:49.571072 #20493]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 11:00:49 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"62"}, see debug logs for body
+D, [2019-08-20T18:00:49.571163 #20493] DEBUG -- : body: {"error":"invalid marker","message":"invalid marker","code":2}
+I, [2019-08-20T18:00:49.574561 #20493]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to update todo with PUT /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T18:00:49.576370 #20493]  INFO -- : Sending PUT request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T18:00:49.576428 #20493] DEBUG -- : body :
+I, [2019-08-20T18:00:49.579526 #20493]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 11:00:49 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
+D, [2019-08-20T18:00:49.579602 #20493] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}
+I, [2019-08-20T18:00:49.582670 #20493]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to delete todo with id1 with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T18:00:49.584594 #20493]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T18:00:49.584659 #20493] DEBUG -- : body :
+I, [2019-08-20T18:00:49.587432 #20493]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 11:00:49 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
+D, [2019-08-20T18:00:49.587501 #20493] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}
+I, [2019-08-20T18:00:49.590488 #20493]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to get todo with id = id1 with GET /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T18:00:49.592318 #20493]  INFO -- : Sending GET request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T18:00:49.592383 #20493] DEBUG -- : body :
+I, [2019-08-20T18:00:49.595295 #20493]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 11:00:49 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
+D, [2019-08-20T18:00:49.595365 #20493] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}
+I, [2019-08-20T18:00:59.681989 #20746]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todo exists A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-20T18:00:59.689277 #20746]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todo exists"}]}, see debug logs for body
+D, [2019-08-20T18:00:59.689380 #20746] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-20T18:01:02.785538 #20746]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"75", "Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 11:01:02 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-20T18:01:02.785744 #20746] DEBUG -- : body: {"responseStatus":{"code":200},"id":"0616cc35-97fc-47c3-a7e9-2b08bda62379"}
+I, [2019-08-20T18:01:02.817334 #20746]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todos existing on Api A request to list todo with GET /v1/todo?completed=true&limit=10&marker=id1 returns a response which has status code 200'
+I, [2019-08-20T18:01:02.821899 #20746]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=10&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todos existing on Api"}]}, see debug logs for body
+D, [2019-08-20T18:01:02.821970 #20746] DEBUG -- : body :
+I, [2019-08-20T18:01:02.837160 #20746]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 11:01:02 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"62"}, see debug logs for body
+D, [2019-08-20T18:01:02.837243 #20746] DEBUG -- : body: {"error":"invalid marker","message":"invalid marker","code":2}
+I, [2019-08-20T18:01:02.840591 #20746]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to update todo with PUT /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T18:01:02.842398 #20746]  INFO -- : Sending PUT request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T18:01:02.842454 #20746] DEBUG -- : body :
+I, [2019-08-20T18:01:02.845642 #20746]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 11:01:02 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
+D, [2019-08-20T18:01:02.845728 #20746] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}
+I, [2019-08-20T18:01:02.850353 #20746]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to delete todo with id1 with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T18:01:02.852544 #20746]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T18:01:02.852621 #20746] DEBUG -- : body :
+I, [2019-08-20T18:01:02.855488 #20746]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 11:01:02 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
+D, [2019-08-20T18:01:02.855562 #20746] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}
+I, [2019-08-20T18:01:02.858539 #20746]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to get todo with id = id1 with GET /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-20T18:01:02.861493 #20746]  INFO -- : Sending GET request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-20T18:01:02.861563 #20746] DEBUG -- : body :
+I, [2019-08-20T18:01:02.866197 #20746]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 11:01:02 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"84"}, see debug logs for body
+D, [2019-08-20T18:01:02.866273 #20746] DEBUG -- : body: {"error":"pg: no rows in result set","message":"pg: no rows in result set","code":2}
+I, [2019-08-20T18:07:31.087721 #21728]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todo exists A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-20T18:07:31.094378 #21728]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todo exists"}]}, see debug logs for body
+D, [2019-08-20T18:07:31.094501 #21728] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-20T18:07:31.124920 #21728]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"75", "Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 11:07:31 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-20T18:07:31.124990 #21728] DEBUG -- : body: {"responseStatus":{"code":200},"id":"6286b8e0-c7d2-4ccb-bae8-64577fedc47c"}
+I, [2019-08-20T18:21:43.401888 #23005]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todos existing on Api A request to list todo with GET /v1/todo?completed=true&limit=10&marker=id1 returns a response which has status code 200'
+I, [2019-08-20T18:21:43.409296 #23005]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=10&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todos existing on Api"}]}, see debug logs for body
+D, [2019-08-20T18:21:43.409364 #23005] DEBUG -- : body :
+I, [2019-08-20T18:21:43.444299 #23005]  INFO -- : Received response with status: 500, headers: {"Content-Type"=>"application/json", "Date"=>"Tue, 20 Aug 2019 11:21:43 GMT", "Trailer"=>"Grpc-Trailer-Content-Type", "Content-Length"=>"62"}, see debug logs for body
+D, [2019-08-20T18:21:43.444375 #23005] DEBUG -- : body: {"error":"invalid marker","message":"invalid marker","code":2}
+I, [2019-08-21T08:54:02.633985 #21158]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todo exists A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-21T08:54:02.640450 #21158]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todo exists"}]}, see debug logs for body
+D, [2019-08-21T08:54:02.640527 #21158] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-21T08:54:02.685277 #21158]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"75", "Content-Type"=>"application/json", "Date"=>"Wed, 21 Aug 2019 01:54:02 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-21T08:54:02.685349 #21158] DEBUG -- : body: {"responseStatus":{"code":200},"id":"f209b5d1-9373-4e1f-955d-2e13c556c2b8"}
+I, [2019-08-21T12:02:57.655872 #11292]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todo exists A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-21T12:02:57.662366 #11292]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todo exists"}]}, see debug logs for body
+D, [2019-08-21T12:02:57.662461 #11292] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-21T12:02:57.683608 #11292]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"42", "Content-Type"=>"application/json", "Date"=>"Wed, 21 Aug 2019 05:02:57 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-21T12:02:57.683671 #11292] DEBUG -- : body: {"responseStatus":{"code":200},"id":"id1"}
+I, [2019-08-21T12:03:39.645064 #11513]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todo exists A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-21T12:03:39.651043 #11513]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todo exists"}]}, see debug logs for body
+D, [2019-08-21T12:03:39.651123 #11513] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-21T12:03:39.673866 #11513]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"42", "Content-Type"=>"application/json", "Date"=>"Wed, 21 Aug 2019 05:03:39 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-21T12:03:39.674460 #11513] DEBUG -- : body: {"responseStatus":{"code":200},"id":"id1"}
+I, [2019-08-21T12:03:43.982728 #11693]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todo exists A request to create todo with POST /v1/todo returns a response which has status code 200'
+I, [2019-08-21T12:03:43.988950 #11693]  INFO -- : Sending POST request to path: "/v1/todo" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todo exists"}]}, see debug logs for body
+D, [2019-08-21T12:03:43.989038 #11693] DEBUG -- : body :{"description":"discuss about OKRs","title":"1-1 with manager"}
+I, [2019-08-21T12:04:27.731709 #11693]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"42", "Content-Type"=>"application/json", "Date"=>"Wed, 21 Aug 2019 05:04:27 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-21T12:04:27.731969 #11693] DEBUG -- : body: {"responseStatus":{"code":200},"id":"id1"}
+I, [2019-08-22T14:16:23.954346 #11903]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todos existing on Api A request to list todo with GET /v1/todo?completed=true&limit=10&marker=id1 returns a response which has status code 200'
+I, [2019-08-22T14:16:23.960723 #11903]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=10&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todos existing on Api"}]}, see debug logs for body
+D, [2019-08-22T14:16:23.960787 #11903] DEBUG -- : body :
+I, [2019-08-22T14:16:23.978694 #11903]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"101", "Content-Type"=>"application/json", "Date"=>"Thu, 22 Aug 2019 07:16:23 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-22T14:16:23.978769 #11903] DEBUG -- : body: {"responseStatus":{"code":200},"items":[{"id":"id1","title":"ToDo A"},{"id":"id2","title":"ToDo B"}]}
+I, [2019-08-22T14:17:09.211953 #12152]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todos existing on Api A request to list todo with GET /v1/todo?completed=true&limit=10&marker=id1 returns a response which has status code 200'
+I, [2019-08-22T14:17:09.219806 #12152]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=10&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todos existing on Api"}]}, see debug logs for body
+D, [2019-08-22T14:17:09.219878 #12152] DEBUG -- : body :
+I, [2019-08-22T14:17:09.252931 #12152]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"101", "Content-Type"=>"application/json", "Date"=>"Thu, 22 Aug 2019 07:17:09 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-22T14:17:09.253036 #12152] DEBUG -- : body: {"responseStatus":{"code":200},"items":[{"id":"id1","title":"ToDo A"},{"id":"id2","title":"ToDo B"}]}
+I, [2019-08-22T14:18:30.038353 #12635]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todos existing on Api A request to list todo with GET /v1/todo?completed=true&limit=10&marker=id1 returns a response which has status code 200'
+I, [2019-08-22T14:18:49.537459 #12635]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=10&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todos existing on Api"}]}, see debug logs for body
+D, [2019-08-22T14:18:49.537686 #12635] DEBUG -- : body :
+I, [2019-08-22T14:18:51.015941 #12635]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"101", "Content-Type"=>"application/json", "Date"=>"Thu, 22 Aug 2019 07:18:51 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-22T14:18:51.016017 #12635] DEBUG -- : body: {"responseStatus":{"code":200},"items":[{"id":"id1","title":"ToDo A"},{"id":"id2","title":"ToDo B"}]}
+I, [2019-08-22T14:19:48.982358 #13075]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todos existing on Api A request to list todo with GET /v1/todo?completed=true&limit=10&marker=id1 returns a response which has status code 200'
+I, [2019-08-22T14:19:48.988349 #13075]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=10&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todos existing on Api"}]}, see debug logs for body
+D, [2019-08-22T14:19:48.988406 #13075] DEBUG -- : body :
+I, [2019-08-22T14:19:49.008633 #13075]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"102", "Content-Type"=>"application/json", "Date"=>"Thu, 22 Aug 2019 07:19:49 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-22T14:19:49.008693 #13075] DEBUG -- : body: {"responseStatus":{"code":200},"items":[{"id":"id12","title":"ToDo A"},{"id":"id2","title":"ToDo B"}]}
+I, [2019-08-22T14:20:50.959862 #13458]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to delete todo with id1 with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-22T14:20:50.966179 #13458]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-22T14:20:50.966252 #13458] DEBUG -- : body :
+I, [2019-08-22T14:20:50.993030 #13458]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Thu, 22 Aug 2019 07:20:50 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-22T14:20:50.993093 #13458] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-22T14:22:15.556129 #13740]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to delete todo with id1 with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-22T14:22:19.485972 #13740]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-22T14:22:19.486214 #13740] DEBUG -- : body :
+I, [2019-08-22T14:22:56.158444 #13740]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Thu, 22 Aug 2019 07:22:56 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-22T14:22:56.158666 #13740] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-22T14:35:21.487608 #16608]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to delete todo with id1 with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-22T14:35:21.500661 #16608]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-22T14:35:21.501146 #16608] DEBUG -- : body :
+I, [2019-08-22T14:35:21.526356 #16608]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Thu, 22 Aug 2019 07:35:21 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-22T14:35:21.526451 #16608] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-22T14:37:28.530597 #17475]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to delete todo with id1 with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-22T14:37:28.537066 #17475]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-22T14:37:28.537133 #17475] DEBUG -- : body :
+I, [2019-08-22T14:37:28.565222 #17475]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Thu, 22 Aug 2019 07:37:28 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-22T14:37:28.565292 #17475] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-22T14:38:14.951273 #17676]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to delete todo with id1 with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-22T14:38:14.957556 #17676]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-22T14:38:14.957617 #17676] DEBUG -- : body :
+I, [2019-08-22T14:38:14.983313 #17676]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Thu, 22 Aug 2019 07:38:14 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-22T14:38:14.983378 #17676] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-22T14:38:54.165071 #17901]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to delete todo with id1 with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-22T14:39:00.150313 #17901]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-22T14:39:00.150579 #17901] DEBUG -- : body :
+I, [2019-08-22T14:39:52.371112 #18300]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to delete todo with id1 with DELETE /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-22T14:39:52.378238 #18300]  INFO -- : Sending DELETE request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-22T14:39:52.378311 #18300] DEBUG -- : body :
+I, [2019-08-22T14:39:52.402473 #18300]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Thu, 22 Aug 2019 07:39:52 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-22T14:39:52.402553 #18300] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-22T14:45:03.523770 #19499]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to get todo with id = id1 with GET /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-22T14:45:03.529762 #19499]  INFO -- : Sending GET request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-22T14:45:03.529817 #19499] DEBUG -- : body :
+I, [2019-08-22T14:45:03.556732 #19499]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to get todo with id = id1 with GET /v1/todo/id1 returns a response which has a matching body'
+I, [2019-08-22T14:45:03.738736 #19499]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to get todo with id = id1 with GET /v1/todo/id1 returns a response which includes headers "Content-Type" which equals "application/json"'
+I, [2019-08-22T14:45:19.335836 #19701]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to get todo with id = id1 with GET /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-22T14:45:19.342116 #19701]  INFO -- : Sending GET request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-22T14:45:19.342180 #19701] DEBUG -- : body :
+I, [2019-08-22T14:45:19.363936 #19701]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"68", "Content-Type"=>"application/json", "Date"=>"Thu, 22 Aug 2019 07:45:19 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-22T14:45:19.364002 #19701] DEBUG -- : body: {"responseStatus":{"code":200},"item":{"id":"id1","title":"ToDo A"}}
+I, [2019-08-22T14:48:08.871756 #20560]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to get todo with id = id1 with GET /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-22T14:48:08.877580 #20560]  INFO -- : Sending GET request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-22T14:48:08.877635 #20560] DEBUG -- : body :
+I, [2019-08-22T14:48:08.898044 #20560]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"68", "Content-Type"=>"application/json", "Date"=>"Thu, 22 Aug 2019 07:48:08 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-22T14:48:08.898117 #20560] DEBUG -- : body: {"responseStatus":{"code":200},"item":{"id":"id1","title":"ToDo A"}}
+I, [2019-08-22T14:49:01.542576 #20943]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to update todo with PUT /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-22T14:49:01.551853 #20943]  INFO -- : Sending PUT request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-22T14:49:01.551913 #20943] DEBUG -- : body :
+I, [2019-08-22T14:49:01.570067 #20943]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Thu, 22 Aug 2019 07:49:01 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-22T14:49:01.570130 #20943] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-22T14:49:32.469221 #21303]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given A todo with id = id1 exists A request to update todo with PUT /v1/todo/id1 returns a response which has status code 200'
+I, [2019-08-22T14:49:32.475233 #21303]  INFO -- : Sending PUT request to path: "/v1/todo/id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"A todo with id = id1 exists"}]}, see debug logs for body
+D, [2019-08-22T14:49:32.475298 #21303] DEBUG -- : body :
+I, [2019-08-22T14:49:32.502483 #21303]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"31", "Content-Type"=>"application/json", "Date"=>"Thu, 22 Aug 2019 07:49:32 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-22T14:49:32.502548 #21303] DEBUG -- : body: {"responseStatus":{"code":200}}
+I, [2019-08-22T14:50:08.126129 #21661]  INFO -- : Running example 'Verifying a pact between ToDoConsumer and ToDoService Given Todos existing on Api A request to list todo with GET /v1/todo?completed=true&limit=10&marker=id1 returns a response which has status code 200'
+I, [2019-08-22T14:50:08.132132 #21661]  INFO -- : Sending GET request to path: "/v1/todo?completed=true&limit=10&marker=id1" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Todos existing on Api"}]}, see debug logs for body
+D, [2019-08-22T14:50:08.132191 #21661] DEBUG -- : body :
+I, [2019-08-22T14:50:08.152608 #21661]  INFO -- : Received response with status: 200, headers: {"Content-Length"=>"102", "Content-Type"=>"application/json", "Date"=>"Thu, 22 Aug 2019 07:50:08 GMT", "Grpc-Metadata-Content-Type"=>"application/grpc"}, see debug logs for body
+D, [2019-08-22T14:50:08.152669 #21661] DEBUG -- : body: {"responseStatus":{"code":200},"items":[{"id":"id12","title":"ToDo A"},{"id":"id2","title":"ToDo B"}]}

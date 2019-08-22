@@ -3,9 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/go-pg/pg"
+	"github.com/pact-foundation/pact-go/dsl"
 	"grabvn-golang-bootcamp/week_4/practice/todo/protobuf"
-	"grabvn-golang-bootcamp/week_4/practice/todo/server/respository"
 	"grabvn-golang-bootcamp/week_4/practice/todo/server/service"
 	"log"
 	"net"
@@ -13,9 +12,6 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
-	"time"
-
-	"github.com/pact-foundation/pact-go/dsl"
 
 	grpc_runtime "github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/pact-foundation/pact-go/types"
@@ -29,7 +25,7 @@ type toDoImplMock struct {
 }
 
 func (toDoImplMock) Create(item *protobuf.CreateTodoRequest) (string, error) {
-	return "", nil
+	return "id1", nil
 }
 
 func (toDoImplMock) Update(id string, item *protobuf.TodoRequestUpdateInfo) error {
@@ -37,7 +33,7 @@ func (toDoImplMock) Update(id string, item *protobuf.TodoRequestUpdateInfo) erro
 }
 
 func (toDoImplMock) Get(id string) (*protobuf.Todo, error) {
-	return nil, nil
+	return toDos[0], nil
 }
 
 func (toDoImplMock) GetList(limit int32, marker string, complete bool) ([]*protobuf.Todo, error) {
@@ -51,18 +47,18 @@ func (toDoImplMock) Delete(id string) error {
 var toDos []*protobuf.Todo
 
 func startServer() {
-	//todoRepo := &toDoImplMock{}
-	db := pg.Connect(&pg.Options{
-		User:                  "postgres",
-		Password:              "example",
-		Database:              "todo",
-		Addr:                  "localhost" + ":" + "5433",
-		RetryStatementTimeout: true,
-		MaxRetries:            4,
-		MinRetryBackoff:       250 * time.Millisecond,
-	})
+	todoRepo := &toDoImplMock{}
+	//db := pg.Connect(&pg.Options{
+	//	User:                  "postgres",
+	//	Password:              "example",
+	//	Database:              "todo",
+	//	Addr:                  "localhost" + ":" + "5433",
+	//	RetryStatementTimeout: true,
+	//	MaxRetries:            4,
+	//	MinRetryBackoff:       250 * time.Millisecond,
+	//})
 	s := grpc.NewServer()
-	protobuf.RegisterTodoServiceServer(s, service.TodoService{TodoDao: respository.TodoDAO{DB:db}})
+	protobuf.RegisterTodoServiceServer(s, service.TodoService{TodoDao: todoRepo})//respository.TodoDAO{DB: db}})
 
 	lis, err := net.Listen("tcp", grpcAddress)
 	if err != nil {
@@ -103,8 +99,21 @@ func TestToDoService(t *testing.T) {
 		StateHandlers: types.StateHandlers{
 			// Setup any state required by the test
 			// in this case, we ensure there is a "user" in the system
-			"There are todo A and todo B": func() error {
+			"Todo exists": func() error {
 				toDos = []*protobuf.Todo{{Id: "id1", Title: "ToDo A"}, {Id: "id2", Title: "ToDo B"}}
+				return nil
+			},
+			"Getting todos existing on Api": func() error {
+				toDos = []*protobuf.Todo{{Id: "id1", Title: "ToDo A"}, {Id: "id2", Title: "ToDo B"}}
+				return nil
+			},
+
+			"Todos existing on Api": func() error {
+				toDos = []*protobuf.Todo{{Id: "id1", Title: "ToDo A"}, {Id: "id2", Title: "ToDo B"}}
+				return nil
+			},
+			"A todo with id = id1 exists": func() error {
+				toDos = []*protobuf.Todo{{Id: "id1", Title: "ToDo A"}}
 				return nil
 			},
 		},

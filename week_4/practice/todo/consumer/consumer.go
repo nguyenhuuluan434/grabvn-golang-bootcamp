@@ -107,7 +107,12 @@ func (p *ToDoProxy) DeleteToDo(id string) (statusCode int32, err error) {
 	deleteToDoRes := struct {
 		ResponseStatus ResponseStatus `json:"responseStatus"`
 	}{}
+
+	//bodyBytes, err := ioutil.ReadAll(res.Body)
+	//fmt.Println(string(bodyBytes))
+
 	json.NewDecoder(res.Body).Decode(&deleteToDoRes)
+
 	if deleteToDoRes.ResponseStatus.Code != int32(http.StatusOK) {
 		err = errors.New(deleteToDoRes.ResponseStatus.Message)
 	}
@@ -123,12 +128,12 @@ func (p *ToDoProxy) GetToDo(id string) (todo ToDo, err error) {
 	res, _ := http.DefaultClient.Do(req)
 	defer res.Body.Close()
 	getToDoRes := struct {
-		todo           ToDo `json:"todo"`
+		Todo           ToDo `json:"item"`
 		ResponseStatus ResponseStatus `json:"responseStatus"`
 	}{}
 	json.NewDecoder(res.Body).Decode(&getToDoRes)
 	if getToDoRes.ResponseStatus.Code !=int32(http.StatusOK) {
 		err = errors.New(getToDoRes.ResponseStatus.Message)
 	}
-	return getToDoRes.todo, err
+	return getToDoRes.Todo, err
 }

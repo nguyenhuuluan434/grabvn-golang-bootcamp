@@ -7,52 +7,8 @@
   },
   "interactions": [
     {
-      "description": "A request to create todo",
-      "request": {
-        "method": "POST",
-        "path": "/v1/todo",
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "body": {
-          "description": "discuss about OKRs",
-          "title": "1-1 with manager"
-        }
-      },
-      "response": {
-        "status": 200,
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "body": {
-          "id": "id1",
-          "responseStatus": {
-            "code": 200,
-            "message": "klgt"
-          }
-        },
-        "matchingRules": {
-          "$.body": {
-            "match": "type"
-          },
-          "$.body.id": {
-            "match": "type"
-          },
-          "$.body.responseStatus": {
-            "match": "type"
-          },
-          "$.body.responseStatus.code": {
-            "match": "type"
-          },
-          "$.body.responseStatus.message": {
-            "match": "type"
-          }
-        }
-      }
-    },
-    {
       "description": "A request to list todo",
-      "providerState": "There are todos",
+      "providerState": "Todos existing on Api",
       "request": {
         "method": "GET",
         "path": "/v1/todo",
@@ -72,10 +28,6 @@
             {
               "id": "id2",
               "title": "ToDo B"
-            },
-            {
-              "id": "id3",
-              "title": "ToDo C"
             }
           ]
         },
@@ -102,112 +54,6 @@
             "match": "type"
           },
           "$.body.items[1].title": {
-            "match": "type"
-          },
-          "$.body.items[2]": {
-            "match": "type"
-          },
-          "$.body.items[2].id": {
-            "match": "type"
-          },
-          "$.body.items[2].title": {
-            "match": "type"
-          }
-        }
-      }
-    },
-    {
-      "description": "A request to list todo",
-      "providerState": "Update todo with id = id1",
-      "request": {
-        "method": "PUT",
-        "path": "/v1/todo/id1"
-      },
-      "response": {
-        "status": 200,
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "body": {
-          "responseStatus": {
-            "code": 200,
-            "message": ""
-          }
-        },
-        "matchingRules": {
-          "$.body": {
-            "match": "type"
-          },
-          "$.body.responseStatus": {
-            "match": "type"
-          },
-          "$.body.responseStatus.code": {
-            "match": "type"
-          },
-          "$.body.responseStatus.message": {
-            "match": "type"
-          }
-        }
-      }
-    },
-    {
-      "description": "A request to list todo",
-      "providerState": "Delete todo with id = id1",
-      "request": {
-        "method": "DELETE",
-        "path": "/v1/todo/id1"
-      },
-      "response": {
-        "status": 200,
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "body": {
-          "responseStatus": {
-            "message": "",
-            "name": 200
-          }
-        },
-        "matchingRules": {
-          "$.body": {
-            "match": "type"
-          }
-        }
-      }
-    },
-    {
-      "description": "A request to list todo",
-      "providerState": "Get todo with id = id1",
-      "request": {
-        "method": "GET",
-        "path": "/v1/todo/id1"
-      },
-      "response": {
-        "status": 200,
-        "headers": {
-          "Content-Type": "application/json"
-        },
-        "body": {
-          "responseStatus": {
-            "message": "",
-            "name": 200
-          },
-          "todo": {
-            "id": "id1",
-            "title": "ToDo A"
-          }
-        },
-        "matchingRules": {
-          "$.body": {
-            "match": "type"
-          },
-          "$.body.todo": {
-            "match": "type"
-          },
-          "$.body.todo.id": {
-            "match": "type"
-          },
-          "$.body.todo.title": {
             "match": "type"
           }
         }

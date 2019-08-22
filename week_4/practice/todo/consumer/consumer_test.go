@@ -23,20 +23,20 @@ func TestToDoProxy(t *testing.T) {
 	_ = os.Setenv("PATH", env+":/usr/bin/pact/bin/")
 
 	pact.DisableToolValidityCheck = true
-	t.Run("TestCreateToDo", func(t *testing.T) {
-
+	t.Run("Test Create ToDo not exist", func(t *testing.T) {
 		// Set up our expected interactions.
+		reqTitle := "1-1 with manager"
+		reqDesc := "discuss about OKRs"
 		pact.
 			AddInteraction().
-			//Given("UserA is existing").
+			Given("Todo exists").
 			UponReceiving("A request to create todo").
 			WithRequest(dsl.Request{
 				Method:  http.MethodPost,
 				Path:    dsl.String("/v1/todo"),
-				Headers: dsl.MapMatcher{"Content-Type": dsl.String("application/json")},
 				Body: map[string]interface{}{
-					"title":       "1-1 with manager",
-					"description": "discuss about OKRs",
+					"title":       reqTitle,
+					"description": reqDesc,
 				},
 			}).
 			WillRespondWith(dsl.Response{
@@ -44,20 +44,22 @@ func TestToDoProxy(t *testing.T) {
 				Headers: dsl.MapMatcher{"Content-Type": dsl.String("application/json")},
 				Body: dsl.Like(map[string]interface{}{
 					"responseStatus": dsl.Like(map[string]interface{}{
-						"code": dsl.Like(int32(http.StatusOK)), "message": dsl.Like("klgt"),
+						"code": dsl.Like(int32(http.StatusOK)), "message": dsl.Like("none"),
 					}),
 					"id": dsl.Like("id1"),
 				}),
 			})
 
 		// Pass in test case. This is the component that makes the external HTTP call
+		expected := "id1"
 		var test = func() (err error) {
 			proxy := ToDoProxy{Host: "localhost", Port: pact.Server.Port}
-			id, err := proxy.CreateToDoWithRequest(TodoRequest{Title: "1-1 with manager", Description: "discuss about OKRs"})
+			actual, err := proxy.CreateToDoWithRequest(TodoRequest{Title: reqTitle, Description: reqDesc})
 			if err != nil {
 				return err
 			}
-			assert.Equal(t, "id1", id)
+
+			assert.Equal(t, expected, actual)
 			return nil
 		}
 
@@ -67,8 +69,10 @@ func TestToDoProxy(t *testing.T) {
 		}
 	})
 
-	t.Run("TestGetToDoList", func(t *testing.T) {
-		pact.AddInteraction().Given("There are todos").UponReceiving("A request to list todo").
+	t.Run("Test get list ToDo ", func(t *testing.T) {
+		pact.AddInteraction().
+			Given("Todos existing on Api").
+			UponReceiving("A request to list todo").
 			WithRequest(dsl.Request{
 				Method: http.MethodGet,
 				Path:   dsl.String("/v1/todo"),
@@ -82,16 +86,16 @@ func TestToDoProxy(t *testing.T) {
 					dsl.Like(map[string]interface{}{"id": dsl.Like("id2"), "title": dsl.Like("ToDo B")}),
 				}),
 			}),
-		})
+			})
 
 		test := func() (err error) {
 			proxy := ToDoProxy{Host: "localhost", Port: pact.Server.Port}
 			resp, err := proxy.GetListToDo(10, "id1", true)
-
 			if err != nil {
 				return err
 			}
-			fmt.Println(resp)
+			assert.NotNil(t, resp)
+			assert.NotEmpty(t,resp)
 			return nil
 		}
 
@@ -100,9 +104,11 @@ func TestToDoProxy(t *testing.T) {
 		}
 	})
 
-	t.Run("TestUpdateTodo", func(t *testing.T) {
+	t.Run("Test Update Todo", func(t *testing.T) {
 		id := "id1"
-		pact.AddInteraction().Given("Update todo with id = id1").UponReceiving("A request to list todo").
+		pact.AddInteraction().
+			Given("A todo with id = id1 exists").
+			UponReceiving("A request to update todo").
 			WithRequest(dsl.Request{
 				Method: http.MethodPut,
 				Path:   dsl.String(fmt.Sprintf("/v1/todo/%s", id)),
@@ -111,18 +117,19 @@ func TestToDoProxy(t *testing.T) {
 			Headers: dsl.MapMatcher{"Content-Type": dsl.String("application/json")},
 			Body: dsl.Like(map[string]interface{}{
 				"responseStatus": dsl.Like(map[string]interface{}{
-					"code": dsl.Like(int32(http.StatusOK)), "message": dsl.Like(""),
+					"code": dsl.Like(int32(http.StatusOK)),
 				}),
 			}),
 		})
 
+		expected := int32(200)
 		test := func() (err error) {
 			proxy := ToDoProxy{Host: "localhost", Port: pact.Server.Port}
-			resp, err := proxy.UpdateToDo(id, UpdateTodoRequest{Title: "only update title", Completed: true, Description: ""})
+			actual, err := proxy.UpdateToDo(id, UpdateTodoRequest{Title: "only update title", Completed: true, Description: ""})
 			if err != nil {
 				return err
 			}
-			fmt.Println(resp)
+			assert.Equal(t, expected, actual)
 			return nil
 		}
 
@@ -131,9 +138,11 @@ func TestToDoProxy(t *testing.T) {
 		}
 	})
 
-	t.Run("TestDeleteTodo", func(t *testing.T) {
+	t.Run("Test Delete Todo", func(t *testing.T) {
 		id := "id1"
-		pact.AddInteraction().Given("Delete todo with id = id1").UponReceiving("A request to list todo").
+		pact.AddInteraction().
+			Given("A todo with id = id1 exists").
+			UponReceiving("A request to delete todo with id1").
 			WithRequest(dsl.Request{
 				Method: http.MethodDelete,
 				Path:   dsl.String(fmt.Sprintf("/v1/todo/%s", id)),
@@ -142,20 +151,19 @@ func TestToDoProxy(t *testing.T) {
 			Headers: dsl.MapMatcher{"Content-Type": dsl.String("application/json")},
 			Body: dsl.Like(map[string]interface{}{
 				//test another way to create data response body
-				"responseStatus":map[string]interface{}{
-					"name":int32(http.StatusOK) ,
-					"message": "",
+				"responseStatus": map[string]interface{}{
+					"code":    int32(http.StatusOK),
 				},
 			}),
 		})
-
+		expectStatus := int32(http.StatusOK)
 		test := func() (err error) {
 			proxy := ToDoProxy{Host: "localhost", Port: pact.Server.Port}
-			resp, err := proxy.DeleteToDo(id)
+			actualStatus, err := proxy.DeleteToDo(id)
 			if err != nil {
 				return err
 			}
-			fmt.Println(resp)
+			assert.Equal(t, expectStatus, actualStatus)
 			return nil
 		}
 
@@ -164,9 +172,12 @@ func TestToDoProxy(t *testing.T) {
 		}
 	})
 
-	t.Run("TestGetTodo", func(t *testing.T) {
+	t.Run("Test Get Todo", func(t *testing.T) {
 		id := "id1"
-		pact.AddInteraction().Given("Get todo with id = id1").UponReceiving("A request to list todo").
+		title := "ToDo A"
+		pact.AddInteraction().
+			Given("A todo with id = id1 exists").
+			UponReceiving("A request to get todo with id = id1").
 			WithRequest(dsl.Request{
 				Method: http.MethodGet,
 				Path:   dsl.String(fmt.Sprintf("/v1/todo/%s", id)),
@@ -174,21 +185,22 @@ func TestToDoProxy(t *testing.T) {
 			Status:  http.StatusOK,
 			Headers: dsl.MapMatcher{"Content-Type": dsl.String("application/json")},
 			Body: dsl.Like(map[string]interface{}{
-				"todo": dsl.Like(map[string]interface{}{"id": dsl.Like("id1"), "title": dsl.Like("ToDo A")}),
+				"item": dsl.Like(map[string]interface{}{"id": dsl.Like(id), "title": dsl.Like(title)}),
 				"responseStatus": map[string]interface{}{
-					"name":    int32(http.StatusOK),
-					"message": "",
+					"code":    int32(http.StatusOK),
 				},
 			}),
 		})
 
+		expected := ToDo{Id: id, Title: title}
 		test := func() (err error) {
 			proxy := ToDoProxy{Host: "localhost", Port: pact.Server.Port}
-			resp, err := proxy.GetToDo(id)
+			actual, err := proxy.GetToDo(id)
 			if err != nil {
 				return err
 			}
-			fmt.Println(resp)
+			assert.NotNil(t, actual)
+			assert.Equal(t, expected, actual)
 			return nil
 		}
 
