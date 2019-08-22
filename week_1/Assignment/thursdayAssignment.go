@@ -9,8 +9,6 @@ import (
 	"strings"
 )
 
-
-
 func main() {
 
 	fmt.Println("Enter input type: <number 1> <operand> <number 2> ")
@@ -70,7 +68,7 @@ func main() {
 			fmt.Printf("%d * %d = %d \n", firstOperand, secondOperand, result)
 			continue
 		case inputParse[1] == "/":
-			if secondOperand == 0{
+			if secondOperand == 0 {
 				println("Not divide 0")
 				continue
 			}
@@ -84,4 +82,3 @@ func main() {
 
 	}
 }
-
