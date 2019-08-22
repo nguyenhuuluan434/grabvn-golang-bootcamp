@@ -1,0 +1,119 @@
+I, [2019-08-22T14:49:43.461941 #21468]  INFO -- : Registered expected interaction GET /v1/todo?completed=true&limit=10&marker=id1
+D, [2019-08-22T14:49:43.462364 #21468] DEBUG -- : {
+  "description": "A request to list todo",
+  "providerState": "Todos existing on Api",
+  "request": {
+    "method": "GET",
+    "path": "/v1/todo",
+    "query": {
+      "completed": [
+        "true"
+      ],
+      "limit": [
+        "10"
+      ],
+      "marker": [
+        "id1"
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "json_class": "Pact::SomethingLike",
+      "contents": {
+        "items": {
+          "json_class": "Pact::SomethingLike",
+          "contents": [
+            {
+              "json_class": "Pact::SomethingLike",
+              "contents": {
+                "id": {
+                  "json_class": "Pact::SomethingLike",
+                  "contents": "id1"
+                },
+                "title": {
+                  "json_class": "Pact::SomethingLike",
+                  "contents": "ToDo A"
+                }
+              }
+            },
+            {
+              "json_class": "Pact::SomethingLike",
+              "contents": {
+                "id": {
+                  "json_class": "Pact::SomethingLike",
+                  "contents": "id2"
+                },
+                "title": {
+                  "json_class": "Pact::SomethingLike",
+                  "contents": "ToDo B"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+I, [2019-08-22T14:49:43.464795 #21468]  INFO -- : Received request GET /v1/todo?limit=10&completed=true&marker=id1
+D, [2019-08-22T14:49:43.464895 #21468] DEBUG -- : {
+  "path": "/v1/todo",
+  "query": "limit=10&completed=true&marker=id1",
+  "method": "get",
+  "headers": {
+    "Host": "localhost:37591",
+    "User-Agent": "Go-http-client/1.1",
+    "Accept-Encoding": "gzip",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2019-08-22T14:49:43.465352 #21468]  INFO -- : Found matching response for GET /v1/todo?completed=true&limit=10&marker=id1
+D, [2019-08-22T14:49:43.465590 #21468] DEBUG -- : {
+  "status": 200,
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "json_class": "Pact::SomethingLike",
+    "contents": {
+      "items": {
+        "json_class": "Pact::SomethingLike",
+        "contents": [
+          {
+            "json_class": "Pact::SomethingLike",
+            "contents": {
+              "id": {
+                "json_class": "Pact::SomethingLike",
+                "contents": "id1"
+              },
+              "title": {
+                "json_class": "Pact::SomethingLike",
+                "contents": "ToDo A"
+              }
+            }
+          },
+          {
+            "json_class": "Pact::SomethingLike",
+            "contents": {
+              "id": {
+                "json_class": "Pact::SomethingLike",
+                "contents": "id2"
+              },
+              "title": {
+                "json_class": "Pact::SomethingLike",
+                "contents": "ToDo B"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+I, [2019-08-22T14:49:43.511763 #21468]  INFO -- : Verifying - interactions matched
+I, [2019-08-22T14:49:43.555529 #21468]  INFO -- : Cleared interactions

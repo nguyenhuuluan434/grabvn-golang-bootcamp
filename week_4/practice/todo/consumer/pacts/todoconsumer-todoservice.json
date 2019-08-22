@@ -1,0 +1,68 @@
+{
+  "consumer": {
+    "name": "ToDoConsumer"
+  },
+  "provider": {
+    "name": "ToDoService"
+  },
+  "interactions": [
+    {
+      "description": "A request to list todo",
+      "providerState": "Todos existing on Api",
+      "request": {
+        "method": "GET",
+        "path": "/v1/todo",
+        "query": "completed=true&limit=10&marker=id1"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "items": [
+            {
+              "id": "id1",
+              "title": "ToDo A"
+            },
+            {
+              "id": "id2",
+              "title": "ToDo B"
+            }
+          ]
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          },
+          "$.body.items": {
+            "match": "type"
+          },
+          "$.body.items[0]": {
+            "match": "type"
+          },
+          "$.body.items[0].id": {
+            "match": "type"
+          },
+          "$.body.items[0].title": {
+            "match": "type"
+          },
+          "$.body.items[1]": {
+            "match": "type"
+          },
+          "$.body.items[1].id": {
+            "match": "type"
+          },
+          "$.body.items[1].title": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

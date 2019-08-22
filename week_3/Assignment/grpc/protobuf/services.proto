@@ -1,0 +1,161 @@
+
+syntax ="proto3";
+import "google/protobuf/timestamp.proto";
+
+package customerfeedback;
+
+//protoc -I protobuf/  protobuf/services.proto --go_out=plugins=grpc:passengerfeedbackservice
+service PassengerFeedbackService{
+    //passenger
+    rpc addNewPassenger (CreatePassengerRequest) returns (PassengerInfoResponse){}
+    rpc getPassengerById (GetPassengerRequest) returns (PassengerInfoResponse){}
+
+    //booking
+    rpc addBooking (CreateBookingRequest) returns (CreateBookingResponse) { }
+    rpc getBookingByCode(GetBookingRequest) returns (GetBookingResponse){}
+    rpc getBookingByPassengerId(GetBookingRequestByPassengerId) returns (PassengerBookingResponse){}
+    rpc updateFinishBooking (UpdateBookingRequest) returns (UpdateBookingResponse) { }
+
+    //feedback
+    //+ Add passenger feedback
+    rpc createFeedback(CreateFeedbackRequest) returns (CreateFeedbackResponse) { }
+    //+ Get by booking code
+    rpc getFeedbackByBookingCode(GetFeedbackByBookingCode) returns (GetFeedbackResponse){}
+    //+ Get by passenger id
+    rpc getFeedbackByPassengerId(GetFeedbackByPassengerId) returns (PassengerFeedbackResponse){}
+    //+ Delete by passenger id
+    rpc deleteFeedbackByPassengerId(DeleteFeedbackByPassengerId) returns (DeleteFeedBackResponse){}
+}
+
+message ResponseInfo{
+    string message =1;
+    //base on http code
+    int32 code = 2;
+}
+
+message PagingRequest{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+}
+
+message PagingResponse{
+    int32 totalPage =1;
+    int32 totalRecord =2;
+}
+//passenger
+message CreatePassengerRequest{
+    string name = 1;
+}
+
+message PassengerInfoResponse{
+    reserved 7,8,9,10;
+    string id = 1;
+    string name = 2 ;
+    ResponseInfo responseStatus = 3;
+}
+
+message GetPassengerRequest{
+    string id = 1;
+}
+
+//booking
+message Location{
+    int32 x =1;
+    int32 y =2;
+}
+
+message CreateBookingRequest{
+    string passengerId =1;
+    Location from  = 2;
+    Location to  = 3;
+}
+
+message UpdateBookingRequest{
+    string BookingCode =1;
+    bool IsFinish =2;
+}
+
+message BookingInfoResponse{
+    string bookingCode =1;
+    Location from  = 2;
+    Location to  = 3;
+    bool isFinish = 4;
+    google.protobuf.Timestamp createdAt = 8;
+    google.protobuf.Timestamp finishAt =9;
+}
+
+message CreateBookingResponse{
+    BookingInfoResponse booking = 1;
+    ResponseInfo responseStatus = 2;
+}
+
+message GetBookingResponse{
+    BookingInfoResponse booking = 1;
+    ResponseInfo responseStatus = 2;
+}
+
+message UpdateBookingResponse{
+    ResponseInfo responseStatus = 1;
+}
+
+message GetBookingRequest{
+    string bookingCode =1;
+}
+
+message GetBookingRequestByPassengerId{
+    string passengerId =1;
+    PagingRequest pagingRequest = 2;
+}
+
+message PassengerBookingResponse{
+    repeated BookingInfoResponse bookings =1;
+    ResponseInfo responseStatus = 2;
+    PagingResponse pagingResponse =5;
+}
+
+//feedback
+message CreateFeedbackRequest{
+    string bookingCode = 1;
+    string feedbackMessage = 2;
+}
+
+message CreateFeedbackResponse{
+    ResponseInfo responseStatus = 1;
+}
+
+message FeedbackInfoResponse {
+    string bookingCode = 1;
+    string feedbackMessage = 2;
+    google.protobuf.Timestamp createdAt = 8;
+}
+
+message GetFeedbackResponse{
+    FeedbackInfoResponse feedBack = 1;
+    ResponseInfo responseStatus = 2;
+}
+
+message GetFeedbackByBookingCode{
+    string bookingCode =1;
+}
+
+message GetFeedbackByPassengerId{
+    string passengerId =1;
+    PagingRequest pagingRequest = 2;
+}
+
+message PassengerFeedbackResponse{
+    repeated FeedbackInfoResponse feedbacks = 1;
+    ResponseInfo responseStatus = 2;
+    PagingResponse pagingResponse =5;
+}
+
+message DeleteFeedbackByPassengerId{
+    string passengerId = 1;
+}
+
+message DeleteFeedBackResponse{
+    int64 totalFeedBack =1;
+    ResponseInfo responseStatus = 2;
+}
+
+

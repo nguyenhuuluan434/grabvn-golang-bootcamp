@@ -1,0 +1,120 @@
+syntax ="proto3";
+
+package todo.v1;
+option go_package = "protobuf";
+
+import "google/api/annotations.proto";
+
+import "google/protobuf/timestamp.proto";
+
+message Todo {
+    string id = 1;
+    string title = 2;
+    string description = 3;
+
+    // @inject_tag: sql:",notnull,default:false"
+    bool completed = 4;
+    // @inject_tag: sql:",notnull,default:false"
+    bool deleted = 5;
+    // @inject_tag: sql:"type:timestamptz,default:now()"
+    google.protobuf.Timestamp created_at = 6;
+
+    // @inject_tag: sql:"type:timestamptz"
+    google.protobuf.Timestamp updated_at = 7;
+}
+
+message TodoRequestCreateInfo{
+    string title = 1;
+    string description = 2;
+}
+
+message CreateTodoRequest{
+    TodoRequestCreateInfo item =1;
+}
+
+message CreateTodoResponse {
+    ResponseStatus responseStatus = 1;
+    string id = 2;
+}
+
+message GetTodoRequest {
+    string id = 1;
+}
+
+message GetTodoResponse {
+    ResponseStatus responseStatus = 1;
+    Todo item = 2;
+}
+
+message ListTodoRequest {
+    int32 limit = 1;
+    string marker = 2;
+    bool completed = 3;
+}
+
+message ListTodoResponse {
+    ResponseStatus responseStatus = 1;
+    repeated Todo items = 2;
+}
+
+message DeleteTodoRequest {
+    string id = 1;
+}
+
+message DeleteTodoResponse {
+    ResponseStatus responseStatus = 1;
+}
+
+message TodoRequestUpdateInfo{
+    string title = 1;
+    string description = 2;
+    bool completed=3;
+}
+
+message UpdateTodoRequest{
+    string id = 1;
+    TodoRequestUpdateInfo item =2;
+}
+
+message UpdateTodoReponse{
+    ResponseStatus responseStatus = 1;
+}
+message ResponseStatus{
+     int32 code =1;
+     string message =2;
+}
+
+
+service TodoService{
+    rpc CreateTodo(CreateTodoRequest) returns (CreateTodoResponse){
+        option (google.api.http) ={
+			post: "/v1/todo"
+			body: "item"
+		};
+    }
+
+    rpc GetTodo(GetTodoRequest) returns (GetTodoResponse){
+        option (google.api.http) ={
+			get: "/v1/todo/{id}"
+		};
+    }
+
+    rpc ListTodo(ListTodoRequest) returns (ListTodoResponse){
+        option (google.api.http) ={
+			get: "/v1/todo"
+		};
+    }
+
+    rpc UpdateTodo(UpdateTodoRequest) returns (UpdateTodoReponse){
+        option (google.api.http) ={
+			put: "/v1/todo/{id}"
+			body: "item"
+		};
+    }
+
+    rpc DeleteTodo(DeleteTodoRequest) returns (UpdateTodoReponse){
+        option (google.api.http) ={
+			delete: "/v1/todo/{id}"
+		};
+    }
+}
